@@ -1,0 +1,354 @@
+DDR Version 1.24 20191016
+In
+channel 0
+CS = 0
+MR0=0x19
+MR4=0x3
+MR5=0x6
+MR8=0x8
+MR12=0x72
+MR14=0x72
+MR18=0x0
+MR19=0x0
+MR24=0x8
+MR25=0xFF
+CS = 1
+MR0=0x19
+MR4=0x3
+MR5=0x6
+MR8=0x8
+MR12=0x72
+MR14=0x72
+MR18=0x0
+MR19=0x0
+MR24=0x8
+MR25=0xFF
+channel 1
+CS = 0
+MR0=0x19
+MR4=0x3
+MR5=0x6
+MR8=0x8
+MR12=0x72
+MR14=0x72
+MR18=0x0
+MR19=0x0
+MR24=0x8
+MR25=0xFF
+CS = 1
+MR0=0x19
+MR4=0x3
+MR5=0x6
+MR8=0x8
+MR12=0x72
+MR14=0x72
+MR18=0x0
+MR19=0x0
+MR24=0x8
+MR25=0xFF
+channel 0 training pass!
+channel 1 training pass!
+change freq to 416MHz 0,1
+Channel 0: LPDDR4,416MHz
+Bus Width=32 Col=10 Bank=8 Row=15/15 CS=2 Die Bus-Width=16 Size=2048MB
+Channel 1: LPDDR4,416MHz
+Bus Width=32 Col=10 Bank=8 Row=15/15 CS=2 Die Bus-Width=16 Size=2048MB
+256B stride
+channel 0
+CS = 0
+MR0=0x19
+MR4=0x3
+MR5=0x6
+MR8=0x8
+MR12=0x72
+MR14=0x72
+MR18=0x0
+MR19=0x0
+MR24=0x8
+MR25=0xFF
+CS = 1
+MR0=0x19
+MR4=0x3
+MR5=0x6
+MR8=0x8
+MR12=0x72
+MR14=0x72
+MR18=0x0
+MR19=0x0
+MR24=0x8
+MR25=0xFF
+channel 1
+CS = 0
+MR0=0x19
+MR4=0x3
+MR5=0x6
+MR8=0x8
+MR12=0x72
+MR14=0x72
+MR18=0x0
+MR19=0x0
+MR24=0x8
+MR25=0xFF
+CS = 1
+MR0=0x19
+MR4=0x3
+MR5=0x6
+MR8=0x8
+MR12=0x72
+MR14=0x72
+MR18=0x0
+MR19=0x0
+MR24=0x8
+MR25=0xFF
+channel 0 training pass!
+channel 1 training pass!
+channel 0, cs 0, advanced training done
+channel 0, cs 1, advanced training done
+channel 1, cs 0, advanced training done
+channel 1, cs 1, advanced training done
+change freq to 856MHz 1,0
+ch 0 ddrconfig = 0x101, ddrsize = 0x2020
+ch 1 ddrconfig = 0x101, ddrsize = 0x2020
+pmugrf_os_reg[2] = 0x3AA1FAA1, stride = 0xD
+ddr_set_rate to 328MHZ
+ddr_set_rate to 666MHZ
+ddr_set_rate to 416MHZ, ctl_index 0
+ddr_set_rate to 856MHZ, ctl_index 1
+support 416 856 328 666 MHz, current 856MHz
+OUT
+Boot1 Release Time: Dec 24 2019 18:00:26, version: 1.24
+CPUId = 0x0
+ChipType = 0x10, 340
+SdmmcInit=2 0
+BootCapSize=100000
+UserCapSize=29820MB
+FwPartOffset=2000 , 100000
+mmc0:cmd8,20
+mmc0:cmd5,20
+mmc0:cmd55,20
+mmc0:cmd1,20
+mmc0:cmd8,20
+mmc0:cmd5,20
+mmc0:cmd55,20
+mmc0:cmd1,20
+mmc0:cmd8,20
+mmc0:cmd5,20
+mmc0:cmd55,20
+mmc0:cmd1,20
+SdmmcInit=0 1
+StorageInit ok = 68352
+SecureMode = 0
+SecureInit read PBA: 0x4
+SecureInit read PBA: 0x404
+SecureInit read PBA: 0x804
+SecureInit read PBA: 0xc04
+SecureInit read PBA: 0x1004
+SecureInit read PBA: 0x1404
+SecureInit read PBA: 0x1804
+SecureInit read PBA: 0x1c04
+SecureInit ret = 0, SecureMode = 0
+atags_set_bootdev: ret:(0)
+GPT part:  0, name:          loader1, start:0x40, size:0x1f80
+GPT part:  1, name:            uboot, start:0x4000, size:0x2000
+GPT part:  2, name:            trust, start:0x6000, size:0x2000
+GPT part:  3, name:             misc, start:0x8000, size:0x2000
+GPT part:  4, name:         resource, start:0xa000, size:0x8000
+GPT part:  5, name:           kernel, start:0x12000, size:0x2e000
+GPT part:  6, name:           rootfs, start:0x40000, size:0x39fdfdf
+find part:uboot OK. first_lba:0x4000.
+find part:trust OK. first_lba:0x6000.
+LoadTrust Addr:0x6000
+No find bl30.bin
+Load uboot, ReadLba = 4000
+Load OK, addr=0x200000, size=0xfc0d0
+RunBL31 0x40000 @ 110407 us
+NOTICE:  BL31: v1.3(debug):734d84297
+NOTICE:  BL31: Built : 15:30:40, Dec 12 2019
+NOTICE:  BL31: Rockchip release version: v1.1
+INFO:    GICv3 with legacy support detected. ARM GICV3 driver initialized in EL3
+INFO:    Using opteed sec cpu_context!
+INFO:    boot cpu mask: 0
+INFO:    plat_rockchip_pmu_init(1190): pd status 3e
+INFO:    BL31: Initializing runtime services
+INFO:    BL31: Initializing BL32
+INF [0x0] TEE-CORE:init_primary_helper:337: Initializing (1.1.0-230-g6c76e8a9 #191 Mon Nov 18 07:00:24 UTC 2019 aarch64)
+
+INF [0x0] TEE-CORE:init_primary_helper:338: Release version: 1.2
+
+INF [0x0] TEE-CORE:init_teecore:83: teecore inits done
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0x200000
+INFO:    SPSR = 0x3c9
+
+
+U-Boot 2017.09 (Jul 25 2022 - 21:03:32 +0800)
+
+Model: Khadas Edge
+PreSerial: 2
+DRAM:  3.8 GiB
+Sysmem: init
+Relocation Offset: f5bd3000, fdt: f3dbbc68
+I2c4 speed: 400000Hz
+PMIC:  RK808
+vdd_center 900000 uV
+vdd_cpu_l 900000 uV
+vdd_log init 950000 uV
+MMC:   dwmmc@fe320000: 1, sdhci@fe330000: 0
+Using default environment
+
+Model: Khadas Edge
+Bootdev(atags): mmc 0
+MMC0: HS400, 150Mhz
+PartType: EFI
+SARADC: 1021
+boot mode: None
+512 bytes read in 198 ms (2 KiB/s)
+1080138 bytes read in 206 ms (5 MiB/s)
+Rockchip UBOOT DRM driver version: v1.0.1
+Using display timing dts
+Detailed mode clock 120000 kHz, flags[a]
+    H: 1080 1184 1188 1315
+    V: 1920 1924 1926 1929
+bus_format: 100e
+final DSI-Link bandwidth: 996 Mbps x 4
+CLK: (uboot. arml: enter 816000 KHz, init 816000 KHz, kernel 0N/A)
+CLK: (uboot. armb: enter 24000 KHz, init 24000 KHz, kernel 0N/A)
+  aplll 816000 KHz
+  apllb 24000 KHz
+  dpll 856000 KHz
+  cpll 24000 KHz
+  gpll 800000 KHz
+  npll 600000 KHz
+  vpll 120000 KHz
+  aclk_perihp 133333 KHz
+  hclk_perihp 66666 KHz
+  pclk_perihp 33333 KHz
+  aclk_perilp0 266666 KHz
+  hclk_perilp0 88888 KHz
+  pclk_perilp0 44444 KHz
+  hclk_perilp1 100000 KHz
+  pclk_perilp1 50000 KHz
+Net:   eth0: ethernet@fe300000
+Setting bus to 8
+I2c8 speed: 100000Hz
+normal power on
+boot wol: disable
+Hit any key to stop autoboot:  0
+Card did not respond to voltage select!
+mmc_init: -95, time 9
+switch to partitions #0, OK
+mmc0(part 0) is current device
+Failed to mount ext2 filesystem...
+** Unrecognized filesystem type **
+Scanning mmc 0:7...
+Found U-Boot script /boot/boot.scr
+6225 bytes read in 46 ms (131.8 KiB/s)
+## Executing script at 00500000
+Run Khadas boot script
+board type = Edge-V (2)
+Uboot loaded from eMMC.
+1474 bytes read in 50 ms (28.3 KiB/s)
+Import env.txt
+DTB: /boot/dtb/rk3399-khadas-edgev-linux.dtb
+mac address: d2:1b:7b:e9:63:ef
+Scanning mmc 0:6...
+Failed to mount ext2 filesystem...
+** Unrecognized filesystem type **
+Scanning mmc 0:7...
+6619576 bytes read in 114 ms (55.4 MiB/s)
+20154376 bytes read in 195 ms (98.6 MiB/s)
+98856 bytes read in 66 ms (1.4 MiB/s)
+Apply dtbo i2c2
+223 bytes read in 79 ms (2 KiB/s)
+Apply dtbo spi3
+223 bytes read in 87 ms (2 KiB/s)
+Apply dtbo i2s0
+223 bytes read in 82 ms (2 KiB/s)
+Apply dtbo onewire
+226 bytes read in 85 ms (2 KiB/s)
+## Loading init Ramdisk from Legacy Image at 0a200000 ...
+   Image Name:   uInitrd
+   Image Type:   AArch64 Linux RAMDisk Image (uncompressed)
+   Data Size:    6619512 Bytes = 6.3 MiB
+   Load Address: 00000000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+## Flattened Device Tree blob at 08300000
+   Booting using the fdt blob at 0x8300000
+   reserving fdt memory region: addr=8300000 size=7e000
+  'reserved-memory' region@110000: addr=110000 size=f0000
+   Loading Ramdisk to f3768000, end f3db8178 ... OK
+   Loading Device Tree to 00000000f36e7000, end 00000000f3767fff ... OK
+512 bytes read in 199 ms (2 KiB/s)
+1080138 bytes read in 208 ms (5 MiB/s)
+Adding bank: 0x00200000 - 0x08400000 (size: 0x08200000)
+Adding bank: 0x0a200000 - 0xf8000000 (size: 0xede00000)
+Total: 4907.28 ms
+
+Starting kernel ...
+
+[    2.403243] rockchip-pcie f8000000.pcie: PCIe link training gen1 timeout!
+[    2.403865] rockchip-pcie f8000000.pcie: deferred probe failed
+[    2.406890] rk-vcodec ff650000.vpu_service: could not find power_model node
+[    2.408878] rk-vcodec ff660000.rkvdec: could not find power_model node
+[    2.422114] mali ff9a0000.gpu: Failed to get regulator
+[    2.422575] mali ff9a0000.gpu: Power control initialization failed
+[    2.433672] rk_gmac-dwmac fe300000.ethernet: cannot get clock clk_mac_speed
+[    2.580689] rockchip-dwc3 usb0: failed to get drvdata dwc3
+[    2.585893] rockchip-dwc3 usb1: fail to get drvdata hcd
+[    2.677969] rockchip-pinctrl pinctrl: pin gpio1-18 already requested by ff350000.spi; cannot claim for 4-001b
+[    2.678845] rockchip-pinctrl pinctrl: pin-50 (4-001b) status -22
+[    2.679413] rockchip-pinctrl pinctrl: could not request pin 50 (gpio1-18) from group pmic-dvs2  on device rockchip-pinctrl
+[    2.680386] rk808 4-001b: Error applying setting, reverse things back
+[    4.260067] cw201x 8-0062: design_capacity missing!
+[    4.260755] cw_bat_probe cw_init error
+[    4.263097] bq25700-charger 8-006b: Cannot read chip ID.
+[    4.268106] rk_tsadcv2_temp_to_code: Invalid conversion table: code=1023, temperature=2147483647
+[    4.300644] cpu cpu0: failed to find power_model node
+[    4.304632] cpu cpu4: failed to find power_model node
+[    4.310076] vccio_sd: unsupportable voltage range: 3300000-3000000uV
+[    4.372825] rockchip-dmc dmc: unable to get devfreq-event device : dfi
+[    4.387101] Error: Driver 'ov4689' is already registered, aborting...
+[    4.387727] Error: Driver 'ov7750' is already registered, aborting...
+[    4.388307] Error: Driver 'ov13850' is already registered, aborting...
+[    4.389028] Error: Driver 'sc031gs' is already registered, aborting...
+[    4.394298] zswap: default zpool zbud not available
+[    4.394746] zswap: pool creation failed
+[    4.403483] rockchip-vop ff900000.vop: missing rockchip,grf property
+[    4.404357] rockchip-vop ff8f0000.vop: missing rockchip,grf property
+[    4.405609] i2c i2c-9: of_i2c: modalias failure on /hdmi@ff940000/ports
+[    4.408939] i2c i2c-10: of_i2c: modalias failure on /dp@fec00000/ports
+[    4.410278] rockchip-drm display-subsystem: connector[HDMI-A-1] can't found any modes
+[    4.411007] rockchip-drm display-subsystem: failed to show loader logo
+[    4.603368] rockchip-dmc dmc: Failed to get leakage
+[    4.603927] rockchip-dmc dmc: Failed to get pvtm
+[    4.604752] rockchip-dmc dmc: failed to get vop pn to msch rl
+[    4.605587] rockchip-dmc dmc: could not find power_model node
+[    4.609827] rk-hdmi-dp-sound hdmi-dp-sound: control 3:0:0:ELD:0 is already present
+[    4.610526] hdmi-audio-codec hdmi-audio-codec.7.auto: ASoC: Failed to add ELD: -16
+[    5.891124] cgroup: cgroup2: unknown option "nsdelegate"
+[    9.100135] CONFIG-ERROR) dhd_conf_set_intiovar: txbf setting failed -23
+
+Ubuntu 18.04.6 LTS Khadas ttyFIQ0
+
+Khadas login: khadas
+Password:
+Last login: Mon Jul 25 14:16:16 UTC 2022 from 192.168.0.100 on pts/0
+
+Welcome to Fenix 1.1.1 Ubuntu 18.04.6 LTS Linux 4.4.194
+ _  ___               _             _____    _               __     __
+| |/ / |__   __ _  __| | __ _ ___  | ____|__| | __ _  ___    \ \   / /
+| ' /| '_ \ / _` |/ _` |/ _` / __| |  _| / _` |/ _` |/ _ \____\ \ / /
+| . \| | | | (_| | (_| | (_| \__ \ | |__| (_| | (_| |  __/_____\ V /
+|_|\_\_| |_|\__,_|\__,_|\__,_|___/ |_____\__,_|\__, |\___|      \_/
+                                               |___/
+
+ * Website:        https://www.khadas.com
+ * Documentation:  https://docs.khadas.com
+ * Forum:          https://forum.khadas.com
+
+khadas@Khadas:~$ uname -a
+Linux Khadas 4.4.194 #2 SMP Mon Jul 25 21:07:53 CST 2022 aarch64 aarch64 aarch64 GNU/Linux
+khadas@Khadas:~$ date
+Mon Jul 25 14:17:51 UTC 2022
+khadas@Khadas:~$
