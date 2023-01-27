@@ -1,0 +1,25 @@
+(Edge-V Pro, 32Gb eMMC)
+
+khadas@Khadas:~$ hdparm -V
+
+	hdparm v9.54
+--------------------------------------------------------
+khadas@Khadas:~$ df -h
+
+	Filesystem      Size  Used Avail Use% Mounted on
+	udev            1.9G     0  1.9G   0% /dev
+	tmpfs           378M  5.6M  373M   2% /run
+	/dev/mmcblk1p7   29G  1.7G   27G   6% /
+	tmpfs           1.9G     0  1.9G   0% /dev/shm
+	tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+	tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+	tmpfs           1.9G     0  1.9G   0% /tmp
+	tmpfs           378M     0  378M   0% /run/user/1000
+--------------------------------------------------------
+khadas@Khadas:~$ sudo hdparm -Tt /dev/mmcblk1p7
+[sudo] password for khadas:
+
+	/dev/mmcblk1p7:
+	 Timing cached reads:   2250 MB in  2.00 seconds = 1125.22 MB/sec
+	 Timing buffered disk reads: 904 MB in  3.01 seconds = 300.79 MB/sec
+--------------------------------------------------------
