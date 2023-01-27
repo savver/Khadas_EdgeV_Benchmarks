@@ -1,0 +1,152 @@
+khadas@Khadas:~$ cpufreq-
+
+	cpufreq-aperf  cpufreq-info   cpufreq-set
+
+khadas@Khadas:~$ cpufreq-info
+
+	cpufrequtils 008: cpufreq-info (C) Dominik Brodowski 2004-2009
+	Report errors and bugs to cpufreq@vger.kernel.org, please.
+	analyzing CPU 0:
+	  driver: cpufreq-dt
+	  CPUs which run at the same hardware frequency: 0 1 2 3
+	  CPUs which need to have their frequency coordinated by software: 0 1 2 3
+	  maximum transition latency: 40.0 us.
+	  hardware limits: 408 MHz - 1.42 GHz
+	  available frequency steps: 408 MHz, 600 MHz, 816 MHz, 1.01 GHz, 1.20 GHz, 1.42 GHz
+	  available cpufreq governors: conservative, ondemand, userspace, powersave, interactive, performance
+	  current policy: frequency should be within 600 MHz and 1.42 GHz.
+					  The governor "ondemand" may decide which speed to use
+					  within this range.
+	  current CPU frequency is 600 MHz (asserted by call to hardware).
+	  cpufreq stats: 408 MHz:0.06%, 600 MHz:66.08%, 816 MHz:0.04%, 1.01 GHz:0.03%, 1.20 GHz:0.01%, 1.42 GHz:33.79%  (250)
+	analyzing CPU 1:
+	  driver: cpufreq-dt
+	  CPUs which run at the same hardware frequency: 0 1 2 3
+	  CPUs which need to have their frequency coordinated by software: 0 1 2 3
+	  maximum transition latency: 40.0 us.
+	  hardware limits: 408 MHz - 1.42 GHz
+	  available frequency steps: 408 MHz, 600 MHz, 816 MHz, 1.01 GHz, 1.20 GHz, 1.42 GHz
+	  available cpufreq governors: conservative, ondemand, userspace, powersave, interactive, performance
+	  current policy: frequency should be within 600 MHz and 1.42 GHz.
+					  The governor "ondemand" may decide which speed to use
+					  within this range.
+	  current CPU frequency is 600 MHz (asserted by call to hardware).
+	  cpufreq stats: 408 MHz:0.06%, 600 MHz:66.08%, 816 MHz:0.04%, 1.01 GHz:0.03%, 1.20 GHz:0.01%, 1.42 GHz:33.79%  (250)
+	analyzing CPU 2:
+	  driver: cpufreq-dt
+	  CPUs which run at the same hardware frequency: 0 1 2 3
+	  CPUs which need to have their frequency coordinated by software: 0 1 2 3
+	  maximum transition latency: 40.0 us.
+	  hardware limits: 408 MHz - 1.42 GHz
+	  available frequency steps: 408 MHz, 600 MHz, 816 MHz, 1.01 GHz, 1.20 GHz, 1.42 GHz
+	  available cpufreq governors: conservative, ondemand, userspace, powersave, interactive, performance
+	  current policy: frequency should be within 600 MHz and 1.42 GHz.
+					  The governor "ondemand" may decide which speed to use
+					  within this range.
+	  current CPU frequency is 600 MHz (asserted by call to hardware).
+	  cpufreq stats: 408 MHz:0.06%, 600 MHz:66.08%, 816 MHz:0.04%, 1.01 GHz:0.03%, 1.20 GHz:0.01%, 1.42 GHz:33.79%  (250)
+	analyzing CPU 3:
+	  driver: cpufreq-dt
+	  CPUs which run at the same hardware frequency: 0 1 2 3
+	  CPUs which need to have their frequency coordinated by software: 0 1 2 3
+	  maximum transition latency: 40.0 us.
+	  hardware limits: 408 MHz - 1.42 GHz
+	  available frequency steps: 408 MHz, 600 MHz, 816 MHz, 1.01 GHz, 1.20 GHz, 1.42 GHz
+	  available cpufreq governors: conservative, ondemand, userspace, powersave, interactive, performance
+	  current policy: frequency should be within 600 MHz and 1.42 GHz.
+					  The governor "ondemand" may decide which speed to use
+					  within this range.
+	  current CPU frequency is 600 MHz (asserted by call to hardware).
+	  cpufreq stats: 408 MHz:0.06%, 600 MHz:66.08%, 816 MHz:0.04%, 1.01 GHz:0.03%, 1.20 GHz:0.01%, 1.42 GHz:33.79%  (250)
+	analyzing CPU 4:
+	  driver: cpufreq-dt
+	  CPUs which run at the same hardware frequency: 4 5
+	  CPUs which need to have their frequency coordinated by software: 4 5
+	  maximum transition latency: 465 us.
+	  hardware limits: 408 MHz - 1.80 GHz
+	  available frequency steps: 408 MHz, 600 MHz, 816 MHz, 1.01 GHz, 1.20 GHz, 1.42 GHz, 1.61 GHz, 1.80 GHz
+	  available cpufreq governors: conservative, ondemand, userspace, powersave, interactive, performance
+	  current policy: frequency should be within 600 MHz and 1.80 GHz.
+					  The governor "ondemand" may decide which speed to use
+					  within this range.
+	  current CPU frequency is 600 MHz (asserted by call to hardware).
+	  cpufreq stats: 408 MHz:0.10%, 600 MHz:99.42%, 816 MHz:0.06%, 1.01 GHz:0.06%, 1.20 GHz:0.10%, 1.42 GHz:0.05%, 1.61 GHz:0.01%, 1.80 GHz:0.21%  (31)
+	analyzing CPU 5:
+	  driver: cpufreq-dt
+	  CPUs which run at the same hardware frequency: 4 5
+	  CPUs which need to have their frequency coordinated by software: 4 5
+	  maximum transition latency: 465 us.
+	  hardware limits: 408 MHz - 1.80 GHz
+	  available frequency steps: 408 MHz, 600 MHz, 816 MHz, 1.01 GHz, 1.20 GHz, 1.42 GHz, 1.61 GHz, 1.80 GHz
+	  available cpufreq governors: conservative, ondemand, userspace, powersave, interactive, performance
+	  current policy: frequency should be within 600 MHz and 1.80 GHz.
+					  The governor "ondemand" may decide which speed to use
+					  within this range.
+	  current CPU frequency is 600 MHz (asserted by call to hardware).
+	  cpufreq stats: 408 MHz:0.10%, 600 MHz:99.42%, 816 MHz:0.06%, 1.01 GHz:0.06%, 1.20 GHz:0.10%, 1.42 GHz:0.05%, 1.61 GHz:0.01%, 1.80 GHz:0.21%  (31)
+--------------------------------------------------------------------------
+khadas@Khadas:~$ cpufreq-aperf
+	You must be root
+
+khadas@Khadas:~$ sudo cpufreq-aperf
+	[sudo] password for khadas:
+	
+	CPU doesn't support APERF/MPERF
+--------------------------------------------------------------------------
+khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu
+
+	cpu0/    cpu1/    cpu2/    cpu3/    cpu4/    cpu5/    cpufreq/ cpuidle/
+
+khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu0/cpu
+
+	cpufreq/ cpuidle/
+	
+khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu0/cpufreq/
+
+	affected_cpus                  scaling_available_governors
+	cpuinfo_cur_freq               scaling_cur_freq
+	cpuinfo_max_freq               scaling_driver
+	cpuinfo_min_freq               scaling_governor
+	cpuinfo_transition_latency     scaling_max_freq
+	ondemand/                      scaling_min_freq
+	related_cpus                   scaling_setspeed
+	scaling_available_frequencies  stats/
+	
+khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
+	600000
+	
+--------------------------------------------------------------------------
+khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq
+
+	600000
+	600000
+	600000
+	600000
+	600000
+	600000
+
+--------------------------------------------------------------------------
+khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu0/cpufreq/stats/t
+
+	time_in_state  total_trans
+
+khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state
+
+	408000 68
+	600000 125750
+	816000 43
+	1008000 34
+	1200000 8
+	1416000 61326
+
+--------------------------------------------------------------------------
+khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu5/cpufreq/stats/time_in_state
+
+	408000 110
+	600000 194576
+	816000 129
+	1008000 65
+	1200000 154
+	1416000 56
+	1608000 7
+	1800000 243
