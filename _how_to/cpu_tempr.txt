@@ -1,0 +1,5 @@
+khadas@Khadas:~$ cat /sys/class/thermal/thermal_zone0/temp
+	45000
+
+khadas@Khadas:~$ cat /sys/class/thermal/thermal_zone1/temp
+	46875

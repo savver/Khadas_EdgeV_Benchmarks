@@ -1,0 +1,290 @@
+service --status-all
+systemctl list-units --type service
+systemctl list-units --type service -all
+systemctl list-units --type service --state running
+systemctl list-units --type service --state failed
+service wpa_supplicant status
+service ssh status
+
+------------------------------------------------------
+khadas@Khadas:~$ service --status-all
+
+	 [ - ]  adbd.sh
+	 [ - ]  alsa-utils
+	 [ - ]  bluetooth
+	 [ + ]  chrony
+	 [ - ]  console-setup.sh
+	 [ + ]  cpufrequtils
+	 [ + ]  cron
+	 [ + ]  dbus
+	 [ + ]  fake-hwclock
+	 [ - ]  gdomap
+	 [ + ]  haveged
+	 [ + ]  hddtemp
+	 [ - ]  hostapd
+	 [ - ]  hwclock.sh
+	 [ - ]  keyboard-setup.sh
+	 [ - ]  khadas-restart-nm.sh
+	 [ + ]  kmod
+	 [ - ]  lircd
+	 [ - ]  lircmd
+	 [ + ]  loadcpufreq
+	 [ + ]  network-manager
+	 [ + ]  networking
+	 [ - ]  plymouth
+	 [ - ]  plymouth-log
+	 [ - ]  pppd-dns
+	 [ + ]  procps
+	 [ - ]  resize2fs
+	 [ + ]  resolvconf
+	 [ ? ]  rng-tools
+	 [ - ]  rsync
+	 [ + ]  rsyslog
+	 [ - ]  screen-cleanup
+	 [ + ]  ssh
+	 [ + ]  sysfsutils
+	 [ + ]  sysstat
+	 [ + ]  udev
+	 [ + ]  unattended-upgrades
+	 [ - ]  watchdog
+	 [ - ]  wd_keepalive
+	 [ - ]  x11-common
+
+--------------------------------------------------------
+khadas@Khadas:~$ systemctl list-units --type service
+
+	  UNIT                          LOAD   ACTIVE SUB     DESCRIPTION
+	  alsa-restore.service          loaded active exited  Save/Restore Sound Card St
+	● bluetooth-khadas.service      loaded failed failed  Khadas Bluetooth service
+	  chrony.service                loaded active running chrony, an NTP client/serv
+	  console-setup.service         loaded active exited  Set console font and keyma
+	  cpufrequtils.service          loaded active exited  LSB: set CPUFreq kernel pa
+	  cron.service                  loaded active running Regular background program
+	  dbus.service                  loaded active running D-Bus System Message Bus
+	  fake-hwclock.service          loaded active exited  Restore / save the current
+	  fenix-hardware-optimize.service loaded active exited  Fenix hardware optimizat
+	  fenix-zram-config.service     loaded active exited  Fenix ZRAM config
+	  getty@tty1.service            loaded active running Getty on tty1
+	  haveged.service               loaded active running Entropy daemon using the H
+	  hddtemp.service               loaded active exited  LSB: disk temperature moni
+	  keyboard-setup.service        loaded active exited  Set the console keyboard l
+	  loadcpufreq.service           loaded active exited  LSB: Load kernel modules n
+	  ModemManager.service          loaded active running Modem Manager
+	  networkd-dispatcher.service   loaded active running Dispatcher daemon for syst
+	  networking.service            loaded active exited  Raise network interfaces
+	● NetworkManager-wait-online.service loaded failed failed  Network Manager Wait
+	  NetworkManager.service        loaded active running Network Manager
+	  polkit.service                loaded active running Authorization Manager
+	  rc-local.service              loaded active exited  /etc/rc.local Compatibilit
+	  resolvconf.service            loaded active exited  Nameserver information man
+	  rng-tools.service             loaded active exited  rng-tools.service
+	  rsyslog.service               loaded active running System Logging Service
+	  serial-getty@ttyFIQ0.service  loaded active running Serial Getty on ttyFIQ0
+	  setvtrgb.service              loaded active exited  Set console scheme
+	  ssh.service                   loaded active running OpenBSD Secure Shell serve
+	  sysfsutils.service            loaded active exited  LSB: Set sysfs variables f
+	  sysstat.service               loaded active exited  Resets System Activity Dat
+	  systemd-journal-flush.service loaded active exited  Flush Journal to Persisten
+	  systemd-journald.service      loaded active running Journal Service
+	  systemd-logind.service        loaded active running Login Service
+	  systemd-modules-load.service  loaded active exited  Load Kernel Modules
+	  systemd-random-seed.service   loaded active exited  Load/Save Random Seed
+	  systemd-remount-fs.service    loaded active exited  Remount Root and Kernel Fi
+	  systemd-resolved.service      loaded active running Network Name Resolution
+	  systemd-sysctl.service        loaded active exited  Apply Kernel Variables
+	  systemd-tmpfiles-setup-dev.service loaded active exited  Create Static Device
+	  systemd-tmpfiles-setup.service loaded active exited  Create Volatile Files and
+	  systemd-udev-trigger.service  loaded active exited  udev Coldplug all Devices
+	  systemd-udevd.service         loaded active running udev Kernel Device Manager
+	  systemd-update-utmp.service   loaded active exited  Update UTMP about System B
+	  systemd-user-sessions.service loaded active exited  Permit User Sessions
+	  unattended-upgrades.service   loaded active running Unattended Upgrades Shutdo
+	  user@1000.service             loaded active running User Manager for UID 1000
+	  wpa_supplicant.service        loaded active running WPA supplicant
+
+	LOAD   = Reflects whether the unit definition was properly loaded.
+	ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+	SUB    = The low-level unit activation state, values depend on unit type.
+
+	47 loaded units listed. Pass --all to see loaded but inactive units, too.
+	To show all installed unit files use 'systemctl list-unit-files'.
+
+--------------------------------------------------------------------------
+khadas@Khadas:~$ systemctl list-units --type service -all
+
+	  UNIT                                  LOAD      ACTIVE   SUB     DESCRIPTION
+	  alsa-restore.service                  loaded    active   exited  Save/Restore
+	  alsa-state.service                    loaded    inactive dead    Manage Sound
+	● apparmor.service                      not-found inactive dead    apparmor.serv
+	  apt-daily-upgrade.service             loaded    inactive dead    Daily apt upg
+	  apt-daily.service                     loaded    inactive dead    Daily apt dow
+	● auditd.service                        not-found inactive dead    auditd.servic
+	● bluetooth-khadas.service              loaded    failed   failed  Khadas Blueto
+	  chrony.service                        loaded    active   running chrony, an NT
+	● connman.service                       not-found inactive dead    connman.servi
+	● console-screen.service                not-found inactive dead    console-scree
+	  console-setup.service                 loaded    active   exited  Set console f
+	  cpufrequtils.service                  loaded    active   exited  LSB: set CPUF
+	  cron.service                          loaded    active   running Regular backg
+	  dbus.service                          loaded    active   running D-Bus System
+	● display-manager.service               not-found inactive dead    display-manag
+	  emergency.service                     loaded    inactive dead    Emergency She
+	  fake-hwclock.service                  loaded    active   exited  Restore / sav
+	  fan.service                           loaded    inactive dead    FAN control
+	  fenix-hardware-optimize.service       loaded    active   exited  Fenix hardwar
+	  fenix-zram-config.service             loaded    active   exited  Fenix ZRAM co
+	  fstrim.service                        loaded    inactive dead    Discard unuse
+	  getty-static.service                  loaded    inactive dead    getty on tty2
+	  getty@tty1.service                    loaded    active   running Getty on tty1
+	  haveged.service                       loaded    active   running Entropy daemo
+	  hddtemp.service                       loaded    active   exited  LSB: disk tem
+	● kbd.service                           not-found inactive dead    kbd.service
+	  keyboard-setup.service                loaded    active   exited  Set the conso
+	  kmod-static-nodes.service             loaded    inactive dead    Create list o
+	  loadcpufreq.service                   loaded    active   exited  LSB: Load ker
+	  ModemManager.service                  loaded    active   running Modem Manager
+	  motd-news.service                     loaded    inactive dead    Message of th
+	● mountkernfs.service                   masked    inactive dead    mountkernfs.s
+	  networkd-dispatcher.service           loaded    active   running Dispatcher da
+	  networking.service                    loaded    active   exited  Raise network
+	● NetworkManager-wait-online.service    loaded    failed   failed  Network Manag
+	  NetworkManager.service                loaded    active   running Network Manag
+	● ondemand.service                      masked    inactive dead    ondemand.serv
+	● openntpd.service                      not-found inactive dead    openntpd.serv
+	  plymouth-quit-wait.service            loaded    inactive dead    Hold until bo
+	  plymouth-quit.service                 loaded    inactive dead    Terminate Ply
+	  plymouth-read-write.service           loaded    inactive dead    Tell Plymouth
+	  plymouth-start.service                loaded    inactive dead    Show Plymouth
+	  polkit.service                        loaded    active   running Authorization
+	  pppd-dns.service                      loaded    inactive dead    Restore /etc/
+	  rc-local.service                      loaded    active   exited  /etc/rc.local
+	  rescue.service                        loaded    inactive dead    Rescue Shell
+	  resolvconf-pull-resolved.service      loaded    inactive dead    resolvconf-pu
+	  resolvconf.service                    loaded    active   exited  Nameserver in
+	  rng-tools.service                     loaded    active   exited  rng-tools.ser
+	  rsync.service                         loaded    inactive dead    fast remote f
+	  rsyslog.service                       loaded    active   running System Loggin
+	  serial-getty@ttyFIQ0.service          loaded    active   running Serial Getty
+	  setvtrgb.service                      loaded    active   exited  Set console s
+	  ssh.service                           loaded    active   running OpenBSD Secur
+	  sysfsutils.service                    loaded    active   exited  LSB: Set sysf
+	  sysstat.service                       loaded    active   exited  Resets System
+	  system-check.service                  loaded    inactive dead    System check
+	  systemd-ask-password-console.service  loaded    inactive dead    Dispatch Pass
+	  systemd-ask-password-plymouth.service loaded    inactive dead    Forward Passw
+	  systemd-ask-password-wall.service     loaded    inactive dead    Forward Passw
+	  systemd-binfmt.service                loaded    inactive dead    Set Up Additi
+	  systemd-fsck-root.service             loaded    inactive dead    File System C
+	  systemd-fsckd.service                 loaded    inactive dead    File System C
+	  systemd-hwdb-update.service           loaded    inactive dead    Rebuild Hardw
+	  systemd-initctl.service               loaded    inactive dead    /dev/initctl
+	  systemd-journal-flush.service         loaded    active   exited  Flush Journal
+	  systemd-journald.service              loaded    active   running Journal Servi
+	  systemd-logind.service                loaded    active   running Login Service
+	  systemd-machine-id-commit.service     loaded    inactive dead    Commit a tran
+	  systemd-modules-load.service          loaded    active   exited  Load Kernel M
+	  systemd-networkd.service              loaded    inactive dead    Network Servi
+	  systemd-random-seed.service           loaded    active   exited  Load/Save Ran
+	  systemd-remount-fs.service            loaded    active   exited  Remount Root
+	  systemd-resolved.service              loaded    active   running Network Name
+	  systemd-rfkill.service                loaded    inactive dead    Load/Save RF
+	  systemd-sysctl.service                loaded    active   exited  Apply Kernel
+	● systemd-sysusers.service              not-found inactive dead    systemd-sysus
+	  systemd-timesyncd.service             loaded    inactive dead    Network Time
+	  systemd-tmpfiles-clean.service        loaded    inactive dead    Cleanup of Te
+	  systemd-tmpfiles-setup-dev.service    loaded    active   exited  Create Static
+	  systemd-tmpfiles-setup.service        loaded    active   exited  Create Volati
+	  systemd-udev-trigger.service          loaded    active   exited  udev Coldplug
+	  systemd-udevd.service                 loaded    active   running udev Kernel D
+	● systemd-update-done.service           not-found inactive dead    systemd-updat
+	  systemd-update-utmp-runlevel.service  loaded    inactive dead    Update UTMP a
+	  systemd-update-utmp.service           loaded    active   exited  Update UTMP a
+	  systemd-user-sessions.service         loaded    active   exited  Permit User S
+	● systemd-vconsole-setup.service        not-found inactive dead    systemd-vcons
+	  unattended-upgrades.service           loaded    active   running Unattended Up
+	  user@1000.service                     loaded    active   running User Manager
+	  wpa_supplicant.service                loaded    active   running WPA supplican
+
+	LOAD   = Reflects whether the unit definition was properly loaded.
+	ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+	SUB    = The low-level unit activation state, values depend on unit type.
+
+	91 loaded units listed.
+	To show all installed unit files use 'systemctl list-unit-files'.
+
+--------------------------------------------------------------------
+khadas@Khadas:~$ systemctl list-units --type service --state running
+
+	UNIT                         LOAD   ACTIVE SUB     DESCRIPTION
+	chrony.service               loaded active running chrony, an NTP client/server
+	cron.service                 loaded active running Regular background program pr
+	dbus.service                 loaded active running D-Bus System Message Bus
+	getty@tty1.service           loaded active running Getty on tty1
+	haveged.service              loaded active running Entropy daemon using the HAVE
+	ModemManager.service         loaded active running Modem Manager
+	networkd-dispatcher.service  loaded active running Dispatcher daemon for systemd
+	NetworkManager.service       loaded active running Network Manager
+	polkit.service               loaded active running Authorization Manager
+	rsyslog.service              loaded active running System Logging Service
+	serial-getty@ttyFIQ0.service loaded active running Serial Getty on ttyFIQ0
+	ssh.service                  loaded active running OpenBSD Secure Shell server
+	systemd-journald.service     loaded active running Journal Service
+	systemd-logind.service       loaded active running Login Service
+	systemd-resolved.service     loaded active running Network Name Resolution
+	systemd-udevd.service        loaded active running udev Kernel Device Manager
+	unattended-upgrades.service  loaded active running Unattended Upgrades Shutdown
+	user@1000.service            loaded active running User Manager for UID 1000
+	wpa_supplicant.service       loaded active running WPA supplicant
+
+	LOAD   = Reflects whether the unit definition was properly loaded.
+	ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+	SUB    = The low-level unit activation state, values depend on unit type.
+
+	19 loaded units listed. Pass --all to see loaded but inactive units, too.
+	To show all installed unit files use 'systemctl list-unit-files'.
+
+-------------------------------------------------------------------------
+khadas@Khadas:~$ systemctl list-units --type service --state failed
+
+	  UNIT                           LOAD   ACTIVE SUB    DESCRIPTION
+	● bluetooth-khadas.service       loaded failed failed Khadas Bluetooth service
+	● NetworkManager-wait-online.service loaded failed failed Network Manager Wait O
+
+	LOAD   = Reflects whether the unit definition was properly loaded.
+	ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+	SUB    = The low-level unit activation state, values depend on unit type.
+
+	2 loaded units listed. Pass --all to see loaded but inactive units, too.
+	To show all installed unit files use 'systemctl list-unit-files'.
+
+---------------------------------------------------------------------------
+khadas@Khadas:~$ service wpa_supplicant status
+
+	● wpa_supplicant.service - WPA supplicant
+	   Loaded: loaded (/lib/systemd/system/wpa_supplicant.service; enabled; vendor p
+	   Active: active (running) since Mon 2022-07-25 14:17:02 UTC; 45min ago
+	 Main PID: 639 (wpa_supplicant)
+		Tasks: 1 (limit: 4524)
+	   CGroup: /system.slice/wpa_supplicant.service
+			   └─639 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+
+	Jul 25 14:17:01 Khadas systemd[1]: Starting WPA supplicant...
+	Jul 25 14:17:02 Khadas wpa_supplicant[639]: Successfully initialized wpa_supplic
+	Jul 25 14:17:02 Khadas systemd[1]: Started WPA supplicant.
+
+---------------------------------------------------------------------------
+khadas@Khadas:~$ service ssh status
+
+	● ssh.service - OpenBSD Secure Shell server
+	   Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enab
+	   Active: active (running) since Mon 2022-07-25 14:17:02 UTC; 46min ago
+	  Process: 764 ExecStartPre=/usr/sbin/sshd -t (code=exited, status=0/SUCCESS)
+	 Main PID: 785 (sshd)
+		Tasks: 1 (limit: 4524)
+	   CGroup: /system.slice/ssh.service
+			   └─785 /usr/sbin/sshd -D
+
+	Jul 25 14:17:02 Khadas systemd[1]: Starting OpenBSD Secure Shell server...
+	Jul 25 14:17:02 Khadas sshd[785]: Server listening on 0.0.0.0 port 22.
+	Jul 25 14:17:02 Khadas systemd[1]: Started OpenBSD Secure Shell server.
+	Jul 25 14:17:02 Khadas sshd[785]: Server listening on :: port 22.
