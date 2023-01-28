@@ -1,0 +1,421 @@
+ifconfig eth0 192.168.0.100 netmask 255.255.255.0 up
+iperf3 -c 192.168.0.99
+iperf3 -c 192.168.0.99 -t300
+iperf3 -c 192.168.0.99 -u
+iperf3 -c 192.168.0.99 -u -b 0
+iperf3 -c 192.168.0.99 -u -b 1000M
+iperf3 -c 192.168.0.99 -t 20000
+iperf3 -c 192.168.0.99 -u -b 1000M -t1800
+
+Windows --> Server
+thinkpad t460, Core i5-8xxx, Windows 10 x64
+Описание: Intel(R) Ethernet Connection I219-LM
+Brandmauer OFF, antivirus OFF, check ping from SBc to PC
+
+https://iperf.fr/iperf-download.php
+iPerf 3.1.3 (8 jun 2016 - 1.3 MiB for Windows Vista 64bits to Windows 10 64bits)
+------------------------------------------------------------------------------------------------------------------------------
+Linux --> Client
+
+check:
+root@Khadas:~# ethtool eth0
+
+	Settings for eth0:
+			Supported ports: [ TP MII ]
+			Supported link modes:   10baseT/Half 10baseT/Full
+									100baseT/Half 100baseT/Full
+									1000baseT/Full
+			Supported pause frame use: No
+			Supports auto-negotiation: Yes
+			Supported FEC modes: Not reported
+			Advertised link modes:  10baseT/Half 10baseT/Full
+									100baseT/Half 100baseT/Full
+									1000baseT/Full
+			Advertised pause frame use: No
+			Advertised auto-negotiation: Yes
+			Advertised FEC modes: Not reported
+			Link partner advertised link modes:  10baseT/Half 10baseT/Full
+												 100baseT/Half 100baseT/Full
+												 1000baseT/Full
+			Link partner advertised pause frame use: No
+			Link partner advertised auto-negotiation: Yes
+			Link partner advertised FEC modes: Not reported
+!!!			Speed: 1000Mb/s
+			Duplex: Full
+			Port: MII
+			PHYAD: 0
+			Transceiver: external
+			Auto-negotiation: on
+			Supports Wake-on: ug
+			Wake-on: d
+			Current message level: 0x0000003f (63)
+								   drv probe link timer ifdown ifup
+			Link detected: yes
+
+root@Khadas:~# ifconfig eth0 192.168.0.100 netmask 255.255.255.0 up
+root@Khadas:~# ifconfig
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.0.100  netmask 255.255.255.0  broadcast 192.168.0.255
+        inet6 fe80::8fde:226e:c14f:e52b  prefixlen 64  scopeid 0x20<link>
+        ether d2:1b:7b:e9:63:ef  txqueuelen 1000  (Ethernet)
+        RX packets 206  bytes 21091 (21.0 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 51  bytes 9274 (9.2 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device interrupt 24
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1  (Local Loopback)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+wlan0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether 10:2c:6b:cc:56:dd  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+root@Khadas:~# ping 192.168.0.99
+PING 192.168.0.99 (192.168.0.99) 56(84) bytes of data.
+64 bytes from 192.168.0.99: icmp_seq=1 ttl=128 time=1.89 ms
+64 bytes from 192.168.0.99: icmp_seq=2 ttl=128 time=1.12 ms
+64 bytes from 192.168.0.99: icmp_seq=3 ttl=128 time=1.35 ms
+64 bytes from 192.168.0.99: icmp_seq=4 ttl=128 time=1.29 ms
+64 bytes from 192.168.0.99: icmp_seq=5 ttl=128 time=1.34 ms
+64 bytes from 192.168.0.99: icmp_seq=6 ttl=128 time=1.01 ms
+^C
+--- 192.168.0.99 ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5009ms
+rtt min/avg/max/mdev = 1.010/1.337/1.896/0.279 ms
+
+------------------------------------------------------------------------------------------------------------------------------
+Windows:
+PS C:\Users\Bott\Downloads\iperf-3.1.3-win64 (1)\iperf-3.1.3-win64> .\iperf3.exe -s
+
+	-----------------------------------------------------------
+	Server listening on 5201
+	-----------------------------------------------------------
+	Accepted connection from 192.168.0.100, port 38174
+	[  5] local 192.168.0.99 port 5201 connected to 192.168.0.100 port 38176
+	[ ID] Interval           Transfer     Bandwidth
+	[  5]   0.00-1.00   sec   108 MBytes   908 Mbits/sec
+	[  5]   1.00-2.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   2.00-3.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   3.00-4.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   4.00-5.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   5.00-6.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   6.00-7.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   7.00-8.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   8.00-9.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   9.00-10.00  sec   112 MBytes   940 Mbits/sec
+	[  5]  10.00-10.03  sec  3.76 MBytes   938 Mbits/sec
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth
+	[  5]   0.00-10.03  sec  0.00 Bytes  0.00 bits/sec                  sender
+	[  5]   0.00-10.03  sec  1.10 GBytes   944 Mbits/sec                  receiver
+	-----------------------------------------------------------
+	Server listening on 5201
+	-----------------------------------------------------------
+
+
+Khadas:
+root@Khadas:~# iperf3 -c 192.168.0.99
+
+	Connecting to host 192.168.0.99, port 5201
+	[  4] local 192.168.0.100 port 38176 connected to 192.168.0.99 port 5201
+	[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
+	[  4]   0.00-1.00   sec   112 MBytes   942 Mbits/sec    0    211 KBytes
+	[  4]   1.00-2.00   sec   113 MBytes   949 Mbits/sec    0    211 KBytes
+	[  4]   2.00-3.00   sec   113 MBytes   949 Mbits/sec    0    211 KBytes
+	[  4]   3.00-4.00   sec   113 MBytes   949 Mbits/sec    0    211 KBytes
+	[  4]   4.00-5.00   sec   113 MBytes   949 Mbits/sec    0    211 KBytes
+	[  4]   5.00-6.00   sec   113 MBytes   949 Mbits/sec    0    211 KBytes
+	[  4]   6.00-7.00   sec   113 MBytes   949 Mbits/sec    0    211 KBytes
+	[  4]   7.00-8.00   sec   113 MBytes   950 Mbits/sec    0    211 KBytes
+	[  4]   8.00-9.00   sec   113 MBytes   949 Mbits/sec    0    211 KBytes
+	[  4]   9.00-10.00  sec   112 MBytes   940 Mbits/sec    0    211 KBytes
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth       Retr
+	[  4]   0.00-10.00  sec  1.10 GBytes   947 Mbits/sec    0             sender
+	[  4]   0.00-10.00  sec  1.10 GBytes   947 Mbits/sec                  receiver
+	
+------------------------------------------------------------------------------------------------------------------------------
+root@Khadas:~# iperf3 -c 192.168.0.99 -t300
+
+	Connecting to host 192.168.0.99, port 5201
+	[  4] local 192.168.0.100 port 38180 connected to 192.168.0.99 port 5201
+	[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
+	[  4]   0.00-1.00   sec   111 MBytes   934 Mbits/sec    0    221 KBytes
+	[  4]   1.00-2.00   sec   113 MBytes   949 Mbits/sec    0    221 KBytes
+	[  4]   2.00-3.00   sec   113 MBytes   949 Mbits/sec    0    221 KBytes
+	[  4]   3.00-4.00   sec   113 MBytes   948 Mbits/sec    0    221 KBytes
+	[  4]   4.00-5.00   sec   113 MBytes   949 Mbits/sec    0    221 KBytes
+	...
+	[  4] 296.00-297.00 sec   113 MBytes   949 Mbits/sec    0    221 KBytes
+	[  4] 297.00-298.00 sec   113 MBytes   949 Mbits/sec    0    221 KBytes
+	[  4] 298.00-299.00 sec   113 MBytes   949 Mbits/sec    0    221 KBytes
+	[  4] 299.00-300.00 sec   113 MBytes   949 Mbits/sec    0    221 KBytes
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth       Retr
+	[  4]   0.00-300.00 sec  33.1 GBytes   948 Mbits/sec    0             sender
+	[  4]   0.00-300.00 sec  33.1 GBytes   948 Mbits/sec                  receiver
+
+	iperf Done.
+
+PS C:\Users\Bott\Downloads\iperf-3.1.3-win64 (1)\iperf-3.1.3-win64> .\iperf3.exe -s
+
+	-----------------------------------------------------------
+	Server listening on 5201
+	-----------------------------------------------------------
+	Accepted connection from 192.168.0.100, port 38178
+	[  5] local 192.168.0.99 port 5201 connected to 192.168.0.100 port 38180
+	[ ID] Interval           Transfer     Bandwidth
+	[  5]   0.00-1.00   sec   107 MBytes   898 Mbits/sec
+	[  5]   1.00-2.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   2.00-3.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   3.00-4.00   sec   113 MBytes   949 Mbits/sec
+	[  5]   4.00-5.00   sec   113 MBytes   949 Mbits/sec
+	...
+	[  5] 294.00-295.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 295.00-296.00 sec   113 MBytes   948 Mbits/sec
+	[  5] 296.00-297.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 297.00-298.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 298.00-299.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 299.00-300.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 300.00-300.02 sec  2.71 MBytes   937 Mbits/sec
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth
+	[  5]   0.00-300.02 sec  0.00 Bytes  0.00 bits/sec                  sender
+	[  5]   0.00-300.02 sec  33.1 GBytes   948 Mbits/sec                  receiver
+	
+------------------------------------------------------------------------------------------------------------------------------
+root@Khadas:~# iperf3 -c 192.168.0.99 -u
+
+	Connecting to host 192.168.0.99, port 5201
+	[  4] local 192.168.0.100 port 54381 connected to 192.168.0.99 port 5201
+	[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+	[  4]   0.00-1.00   sec   128 KBytes  1.05 Mbits/sec  16
+	[  4]   1.00-2.00   sec   128 KBytes  1.05 Mbits/sec  16
+	[  4]   2.00-3.00   sec   128 KBytes  1.05 Mbits/sec  16
+	[  4]   3.00-4.00   sec   128 KBytes  1.05 Mbits/sec  16
+	[  4]   4.00-5.00   sec   128 KBytes  1.05 Mbits/sec  16
+	[  4]   5.00-6.00   sec   128 KBytes  1.05 Mbits/sec  16
+	[  4]   6.00-7.00   sec   128 KBytes  1.05 Mbits/sec  16
+	[  4]   7.00-8.00   sec   128 KBytes  1.05 Mbits/sec  16
+	[  4]   8.00-9.00   sec   128 KBytes  1.05 Mbits/sec  16
+	[  4]   9.00-10.00  sec   128 KBytes  1.05 Mbits/sec  16
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+	[  4]   0.00-10.00  sec  1.25 MBytes  1.05 Mbits/sec  37510.605 ms  0/159 (0%)
+	[  4] Sent 159 datagrams
+
+
+root@Khadas:~# iperf3 -c 192.168.0.99 -u -b 0
+
+	Connecting to host 192.168.0.99, port 5201
+	[  4] local 192.168.0.100 port 32780 connected to 192.168.0.99 port 5201
+	[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+	[  4]   0.00-1.00   sec  8.20 MBytes  68.7 Mbits/sec  1050
+	[  4]   1.00-2.00   sec  7.50 MBytes  62.9 Mbits/sec  960
+	[  4]   2.00-3.00   sec  7.50 MBytes  62.9 Mbits/sec  960
+	[  4]   3.00-4.00   sec  7.50 MBytes  62.9 Mbits/sec  960
+	[  4]   4.00-5.00   sec  7.50 MBytes  62.9 Mbits/sec  960
+	[  4]   5.00-6.00   sec  7.50 MBytes  62.9 Mbits/sec  960
+	[  4]   6.00-7.00   sec  9.84 MBytes  82.6 Mbits/sec  1260
+	[  4]   7.00-8.00   sec  10.0 MBytes  83.9 Mbits/sec  1280
+	[  4]   8.00-9.00   sec  8.91 MBytes  74.7 Mbits/sec  1140
+	[  4]   9.00-10.00  sec  9.92 MBytes  83.2 Mbits/sec  1270
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+	[  4]   0.00-10.00  sec  84.4 MBytes  70.8 Mbits/sec  0.115 ms  995/10790 (9.2%)		!!!
+	[  4] Sent 10790 datagrams
+	iperf Done.
+
+
+root@Khadas:~# iperf3 -c 192.168.0.99 -u -b 1000M
+
+	Connecting to host 192.168.0.99, port 5201
+	[  4] local 192.168.0.100 port 38162 connected to 192.168.0.99 port 5201
+	[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+	[  4]   0.00-1.00   sec  1.80 MBytes  15.1 Mbits/sec  230
+	[  4]   1.00-2.00   sec  1.84 MBytes  15.4 Mbits/sec  235
+	[  4]   2.00-3.00   sec  1.75 MBytes  14.7 Mbits/sec  224
+	[  4]   3.00-4.00   sec  1.75 MBytes  14.7 Mbits/sec  224
+	[  4]   4.00-5.00   sec  1.75 MBytes  14.7 Mbits/sec  224
+	[  4]   5.00-6.00   sec  1.75 MBytes  14.7 Mbits/sec  224
+	[  4]   6.00-7.00   sec  1.76 MBytes  14.7 Mbits/sec  225
+	[  4]   7.00-8.00   sec  1.75 MBytes  14.7 Mbits/sec  224
+	[  4]   8.00-9.00   sec  1.74 MBytes  14.6 Mbits/sec  223
+	[  4]   9.00-10.00  sec  1.67 MBytes  14.0 Mbits/sec  214
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+	[  4]   0.00-10.00  sec  17.6 MBytes  14.7 Mbits/sec  0.125 ms  0/2246 (0%)
+	[  4] Sent 2246 datagrams
+
+root@Khadas:~# iperf3 -c 192.168.0.99 -u -b 1000M -t300
+	Connecting to host 192.168.0.99, port 5201
+	[  4] local 192.168.0.100 port 33825 connected to 192.168.0.99 port 5201
+	[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+	[  4]   0.00-1.00   sec  1.87 MBytes  15.7 Mbits/sec  239
+	[  4]   1.00-2.00   sec  1.75 MBytes  14.7 Mbits/sec  224
+	[  4]   2.00-3.00   sec  1.84 MBytes  15.4 Mbits/sec  235
+	[  4]   3.00-4.00   sec  1.75 MBytes  14.7 Mbits/sec  224
+	...
+	[  4] 297.00-298.00 sec  1.75 MBytes  14.7 Mbits/sec  224
+	[  4] 298.00-299.00 sec  1.83 MBytes  15.3 Mbits/sec  234
+	[  4] 299.00-300.00 sec  1.75 MBytes  14.7 Mbits/sec  224
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+	[  4]   0.00-300.00 sec   521 MBytes  14.6 Mbits/sec  0.159 ms  0/66732 (0%)
+	[  4] Sent 66732 datagrams
+	iperf Done.
+
+------------------------------------------------------------------------------------------------------------
+note: "w1_master_driver w1_bus_master1: Family 0 for 00.328000000000.2d is not registered." is "normal",
+see dmesg after syste, load:
+...
+[    9.298953] WLC_E_IF: NO_IF set, event Ignored
+[    9.300983] P2P interface started
+[   10.859775] rk_gmac-dwmac fe300000.ethernet eth0: Link is Up - 100Mbps/Full - flow control off
+[   37.871361] tty_port_close_start: tty->count = 1 port count = 2.
+[   50.202524] w1_master_driver w1_bus_master1: Family 0 for 00.800000000000.8c is not registered.
+[  107.630580] w1_master_driver w1_bus_master1: Family 0 for 00.400000000000.46 is not registered.
+[  153.498473] w1_master_driver w1_bus_master1: Family 0 for 00.c00000000000.ca is not registered.
+so it's not network error
+
+
+root@Khadas:~# iperf3 -c 192.168.0.99 -t 20000
+
+	[  4] 12631.00-12632.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[  4] 12632.00-12633.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	...
+	[  4] 13759.00-13760.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[  4] 13760.00-13761.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[  4] 13761.00-13762.00 sec   113 MBytes   945 Mbits/sec    0    217 KBytes
+	[15600.127281] BUG: spinlock wrong CPU on CPU#2, dhd_dpc/375
+	[15600.127777]  lock: 0xffffffc0ecdd00d8, .magic: dead4ead, .owner: dhd_dpc/375, .owner_cpu: 1
+	[15600.128518] CPU: 2 PID: 375 Comm: dhd_dpc Not tainted 4.4.194 #2
+	[15600.129049] Hardware name: Khadas Edge-V (DT)
+	[15600.129432] Call trace:
+	[15600.129665] [<ffffff800808827c>] dump_backtrace+0x0/0x220
+	[15600.130144] [<ffffff80080884c0>] show_stack+0x24/0x30
+	[15600.130600] [<ffffff80084c736c>] dump_stack+0x98/0xc0
+	[15600.131056] [<ffffff80080e80ac>] spin_dump+0x84/0xa4
+	[15600.131498] [<ffffff80080e80fc>] spin_bug+0x30/0x3c
+	[15600.131929] [<ffffff80080e83e4>] do_raw_spin_unlock+0xac/0xd0
+	[15600.132442] [<ffffff8008c2d0d8>] _raw_spin_unlock_irqrestore+0x24/0x34
+	[15600.133457] [<ffffff8000c56a90>] dhd_rx_frame+0x44c/0x5ec [bcmdhd]
+	[15600.134405] [<ffffff8000c91aec>] dhdsdio_readframes+0x1294/0x1440 [bcmdhd]
+	[15600.135385] [<ffffff8000c960e4>] dhd_bus_dpc+0x7b4/0xb78 [bcmdhd]
+	[15600.136302] [<ffffff8000c57f80>] dhd_dpc_thread+0x110/0x188 [bcmdhd]
+	[15600.136874] [<ffffff80080b8d64>] kthread+0xe0/0xf0
+	[15600.137306] [<ffffff8008082ef0>] ret_from_fork+0x10/0x20
+	[  4] 13762.00-13763.00 sec   112 MBytes   940 Mbits/sec    0    217 KBytes
+	[  4] 13763.00-13764.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	...
+	[  4] 13776.00-13777.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[15614.844891] w1_master_driver w1_bus_master1: Family 0 for 00.328000000000.2d is not registered.
+	[  4] 13777.00-13778.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[  4] 13778.00-13779.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	...
+	[  4] 14421.00-14422.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[  4] 14422.00-14423.00 sec   110 MBytes   923 Mbits/sec    0    217 KBytes
+	[16261.110518] w1_master_driver w1_bus_master1: Family 0 for 00.5a8000000000.8a is not registered.
+	[  4] 14423.00-14424.00 sec  98.6 MBytes   829 Mbits/sec    0    217 KBytes
+	...
+	[  4] 14467.00-14468.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[  4] 14468.00-14469.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[16307.682337] w1_master_driver w1_bus_master1: Family 0 for 00.da8000000000.06 is not registered.
+	[  4] 14469.00-14470.00 sec   112 MBytes   941 Mbits/sec    0    217 KBytes
+	...
+	[  4] 14549.00-14550.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[16387.859845] w1_master_driver w1_bus_master1: Family 0 for 00.3a8000000000.ef is not registered.
+	[  4] 14550.00-14551.00 sec   112 MBytes   941 Mbits/sec    0    217 KBytes
+	...
+	[  4] 14583.00-14584.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[  4] 14584.00-14585.00 sec   113 MBytes   948 Mbits/sec    0    217 KBytes
+	[16422.890365] w1_master_driver w1_bus_master1: Family 0 for 00.ba8000000000.63 is not registered.
+	[  4] 14585.00-14586.00 sec   113 MBytes   948 Mbits/sec    0    217 KBytes
+	[  4] 14586.00-14587.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	...
+	[  4] 14619.00-14620.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[16457.930386] w1_master_driver w1_bus_master1: Family 0 for 00.7a8000000000.a9 is not registered.
+	[  4] 14620.00-14621.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[  4] 14621.00-14622.00 sec   113 MBytes   949 Mbits/sec    0    217 KBytes
+	[  4] 14622.00-14623.00 sec   113 MBytes   948 Mbits/sec    0    217 KBytes
+	...
+	[  4] 19997.00-19998.00 sec   113 MBytes   948 Mbits/sec    0    218 KBytes
+	[  4] 19998.00-19999.00 sec   113 MBytes   949 Mbits/sec    0    218 KBytes
+	[  4] 19999.00-20000.00 sec   113 MBytes   946 Mbits/sec    0    218 KBytes
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth       Retr
+	[  4]   0.00-20000.00 sec  0.00 (null)s   948 Mbits/sec    0             sender
+	[  4]   0.00-20000.00 sec  0.00 (null)s   948 Mbits/sec                  receiver
+
+Windows:
+	...
+	[  5] 5890.00-5891.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 5891.00-5892.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 5892.00-5893.00 sec  99.4 MBytes   830 Mbits/sec
+	[  5] 5893.00-5894.00 sec   113 MBytes   949 Mbits/sec
+	...
+	[  5] 6202.00-6203.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 6203.00-6204.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 6204.00-6205.00 sec  98.8 MBytes   829 Mbits/sec
+	[  5] 6205.00-6206.00 sec   113 MBytes   949 Mbits/sec
+	...
+	...
+	[  5] 13704.00-13705.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 13705.00-13706.00 sec   104 MBytes   870 Mbits/sec
+	[  5] 13706.00-13707.00 sec   113 MBytes   949 Mbits/sec
+	...
+	[  5] 14005.00-14006.00 sec   112 MBytes   941 Mbits/sec
+	[  5] 14006.00-14007.00 sec  98.3 MBytes   824 Mbits/sec
+	[  5] 14007.00-14008.00 sec   113 MBytes   949 Mbits/sec
+	...
+	[  5] 14329.00-14330.01 sec   110 MBytes   914 Mbits/sec
+	[  5] 14330.01-14331.00 sec  98.5 MBytes   834 Mbits/sec
+	[  5] 14331.00-14332.00 sec   113 MBytes   949 Mbits/sec
+	...
+	[  5] 14421.00-14422.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 14422.00-14423.00 sec  95.7 MBytes   803 Mbits/sec
+	[  5] 14423.00-14424.00 sec   113 MBytes   949 Mbits/sec
+	[  5] 14424.00-14425.00 sec   113 MBytes   949 Mbits/sec
+	...
+	[  5] 14791.00-14792.00 sec   112 MBytes   939 Mbits/sec
+	[  5] 14792.00-14793.00 sec  98.5 MBytes   826 Mbits/sec
+	[  5] 14793.00-14794.00 sec   113 MBytes   949 Mbits/sec
+	...
+	[  5] 19998.00-19999.00 sec   113 MBytes   946 Mbits/sec
+	[  5] 19999.00-19999.28 sec  32.0 MBytes   946 Mbits/sec
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth
+	[  5]   0.00-19999.28 sec  0.00 Bytes  0.00 bits/sec                  sender
+	[  5]   0.00-19999.28 sec  0.00 ▒%v▒s   948 Mbits/sec                  receiver
+	-----------------------------------------------------------
+	Server listening on 5201
+	-----------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------
+root@Khadas:~# iperf3 -c 192.168.0.99 -u -b 1000M -t1800
+
+	Connecting to host 192.168.0.99, port 5201
+	[  4] local 192.168.0.100 port 35564 connected to 192.168.0.99 port 5201
+	[ ID] Interval           Transfer     Bandwidth       Total Datagrams
+	[  4]   0.00-1.00   sec  1.49 MBytes  12.5 Mbits/sec  191
+	[  4]   1.00-2.00   sec  1.66 MBytes  14.0 Mbits/sec  213
+	[  4]   2.00-3.00   sec  1.91 MBytes  16.1 Mbits/sec  245
+	[  4]   3.00-4.00   sec  1.76 MBytes  14.7 Mbits/sec  225
+	[  4]   4.00-5.00   sec  1.74 MBytes  14.6 Mbits/sec  223
+	...
+	[  4] 1798.00-1799.00 sec  1.84 MBytes  15.4 Mbits/sec  235
+	[  4] 1799.00-1800.00 sec  1.75 MBytes  14.7 Mbits/sec  224
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
+	[  4]   0.00-1800.00 sec  3.06 GBytes  14.6 Mbits/sec  0.095 ms  0/400511 (0%)
+	[  4] Sent 400511 datagrams
