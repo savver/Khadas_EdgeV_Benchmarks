@@ -1,0 +1,233 @@
+dmesg | grep nvme
+fdisk -l
+lsblk
+lspci
+lspci -s 01:00.0 -vv
+hdparm -Tt /dev/nvme0n1
+apt search nvme-cli
+nvme list
+nvme id-ctrl /dev/nvme0
+nvme smart-log /dev/nvme0
+
+-------------------------------------------------------------------------------------------------------
+root@Khadas:~# dmesg | grep nvme
+	[    1.937307] nvme 0000:01:00.0: enabling device (0000 -> 0002)
+
+-------------------------------------------------------------------------------------------------------
+khadas@Khadas:~$ fdisk -l
+
+	Disk /dev/ram0: 4 MiB, 4194304 bytes, 8192 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 4096 bytes
+	I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+
+	Disk /dev/nvme0n1: 232.9 GiB, 250059350016 bytes, 488397168 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+-------------------------------------------------------------------------------------------------------
+root@Khadas:~# ll /dev/nvme0n1
+	brw-rw---- 1 root disk 259, 0 Jan 28 20:45 /dev/nvme0n1
+
+-------------------------------------------------------------------------------------------------------
+root@Khadas:~# lsblk
+	NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+	mmcblk1      179:0    0  29.1G  0 disk
+	├─mmcblk1p1  179:1    0     4M  0 part
+	├─mmcblk1p2  179:2    0     4M  0 part
+	├─mmcblk1p3  179:3    0     4M  0 part
+	├─mmcblk1p4  179:4    0     4M  0 part
+	├─mmcblk1p5  179:5    0    16M  0 part
+	├─mmcblk1p6  179:6    0    92M  0 part
+	└─mmcblk1p7  179:7    0    29G  0 part /
+	mmcblk1boot0 179:32   0     4M  1 disk
+	mmcblk1boot1 179:64   0     4M  1 disk
+	mmcblk1rpmb  179:96   0     4M  0 disk
+	zram1        252:1    0   256M  0 disk [SWAP]
+	zram2        252:2    0   256M  0 disk [SWAP]
+	zram3        252:3    0   256M  0 disk [SWAP]
+	zram4        252:4    0   256M  0 disk [SWAP]
+	nvme0n1      259:0    0 232.9G  0 disk
+
+-------------------------------------------------------------------------------------------------------
+root@Khadas:~# lspci
+	00:00.0 PCI bridge: Fuzhou Rockchip Electronics Co., Ltd Device 0100
+	01:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981/PM981
+
+-------------------------------------------------------------------------------------------------------
+root@Khadas:~# lspci -s 01:00.0 -vv
+01:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981/PM981 (prog-if 02 [NVM Express])
+        Subsystem: Samsung Electronics Co Ltd Device a801
+        Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+        Latency: 0
+        Interrupt: pin A routed to IRQ 227
+        Region 0: Memory at fa000000 (64-bit, non-prefetchable) [size=16K]
+        Capabilities: [40] Power Management version 3
+                Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
+                Status: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-
+        Capabilities: [50] MSI: Enable- Count=1/1 Maskable- 64bit+
+                Address: 0000000000000000  Data: 0000
+        Capabilities: [70] Express (v2) Endpoint, MSI 00
+                DevCap: MaxPayload 256 bytes, PhantFunc 0, Latency L0s unlimited, L1 unlimited
+                        ExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 0.000W
+                DevCtl: Report errors: Correctable- Non-Fatal- Fatal- Unsupported-
+                        RlxdOrd+ ExtTag- PhantFunc- AuxPwr- NoSnoop+ FLReset-
+                        MaxPayload 128 bytes, MaxReadReq 512 bytes
+                DevSta: CorrErr- UncorrErr- FatalErr- UnsuppReq- AuxPwr- TransPend-
+                LnkCap: Port #0, Speed 8GT/s, Width x4, ASPM L1, Exit Latency L0s unlimited, L1 <64us
+                        ClockPM+ Surprise- LLActRep- BwNot- ASPMOptComp+
+                LnkCtl: ASPM L1 Enabled; RCB 64 bytes Disabled- CommClk-
+                        ExtSynch- ClockPM+ AutWidDis- BWInt- AutBWInt-
+                LnkSta: Speed 2.5GT/s, Width x4, TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+                DevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR+, OBFF Not Supported
+                DevCtl2: Completion Timeout: 50us to 50ms, TimeoutDis-, LTR-, OBFF Disabled
+                LnkCtl2: Target Link Speed: 8GT/s, EnterCompliance- SpeedDis-
+                         Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-
+                         Compliance De-emphasis: -6dB
+                LnkSta2: Current De-emphasis Level: -3.5dB, EqualizationComplete-, EqualizationPhase1-
+                         EqualizationPhase2-, EqualizationPhase3-, LinkEqualizationRequest-
+        Capabilities: [b0] MSI-X: Enable+ Count=33 Masked-
+                Vector table: BAR=0 offset=00003000
+                PBA: BAR=0 offset=00002000
+        Capabilities: [100 v2] Advanced Error Reporting
+                UESta:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+                UEMsk:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+                UESvrt: DLP+ SDES+ TLP- FCP+ CmpltTO- CmpltAbrt- UnxCmplt- RxOF+ MalfTLP+ ECRC- UnsupReq- ACSViol-
+                CESta:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr-
+                CEMsk:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr+
+                AERCap: First Error Pointer: 00, GenCap+ CGenEn- ChkCap+ ChkEn-
+        Capabilities: [148 v1] Device Serial Number 00-00-00-00-00-00-00-00
+        Capabilities: [158 v1] Power Budgeting <?>
+        Capabilities: [168 v1] #19
+        Capabilities: [188 v1] Latency Tolerance Reporting
+                Max snoop latency: 0ns
+                Max no snoop latency: 0ns
+        Capabilities: [190 v1] L1 PM Substates
+                L1SubCap: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+ L1_PM_Substates+
+                          PortCommonModeRestoreTime=10us PortTPowerOnTime=10us
+                L1SubCtl1: PCI-PM_L1.2- PCI-PM_L1.1- ASPM_L1.2- ASPM_L1.1-
+                           T_CommonMode=0us LTR1.2_Threshold=0ns
+                L1SubCtl2: T_PwrOn=10us
+        Kernel driver in use: nvme
+
+-------------------------------------------------------------------------------------------------------
+root@Khadas:~# hdparm -Tt /dev/nvme0n1
+
+	/dev/nvme0n1:
+	 Timing cached reads:   2164 MB in  2.00 seconds = 1081.86 MB/sec
+	 Timing buffered disk reads: 1608 MB in  3.00 seconds = 535.72 MB/sec
+
+-------------------------------------------------------------------------------------------------------
+root@Khadas:~# apt search nvme
+	Sorting... Done
+	Full Text Search... Done
+	nvme-cli/bionic-updates,now 1.5-1ubuntu1.2 arm64 [installed]
+	  userspace tooling to control NVMe drives
+
+root@Khadas:~# nvme list
+	Node             SN                   Model                                    Namespace Usage                      Format           FW Rev
+	---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------
+	/dev/nvme0n1     S4EUNM0T105725N      Samsung SSD 970 EVO Plus 250GB           1           0.00   B / 250.06  GB    512   B +  0 B   2B2QEXM7
+
+root@Khadas:~# nvme id-ctrl /dev/nvme0
+NVME Identify Controller:
+vid     : 0x144d
+ssvid   : 0x144d
+sn      : S4EUNM0T105725N
+mn      : Samsung SSD 970 EVO Plus 250GB
+fr      : 2B2QEXM7
+rab     : 2
+ieee    : 002538
+cmic    : 0
+mdts    : 9
+cntlid  : 4
+ver     : 10300
+rtd3r   : 30d40
+rtd3e   : 7a1200
+oaes    : 0
+ctratt  : 0
+oacs    : 0x17
+acl     : 7
+aerl    : 3
+frmw    : 0x16
+lpa     : 0x3
+elpe    : 63
+npss    : 4
+avscc   : 0x1
+apsta   : 0x1
+wctemp  : 358
+cctemp  : 358
+mtfa    : 0
+hmpre   : 0
+hmmin   : 0
+tnvmcap : 250059350016
+unvmcap : 0
+rpmbs   : 0
+edstt   : 35
+dsto    : 0
+fwug    : 0
+kas     : 0
+hctma   : 0x1
+mntmt   : 356
+mxtmt   : 358
+sanicap : 0
+hmminds : 0
+hmmaxd  : 0
+sqes    : 0x66
+cqes    : 0x44
+maxcmd  : 0
+nn      : 1
+oncs    : 0x5f
+fuses   : 0
+fna     : 0x5
+vwc     : 0x1
+awun    : 1023
+awupf   : 0
+nvscc   : 1
+acwu    : 0
+sgls    : 0
+subnqn  :
+ioccsz  : 0
+iorcsz  : 0
+icdoff  : 0
+ctrattr : 0
+msdbd   : 0
+ps    0 : mp:7.80W operational enlat:0 exlat:0 rrt:0 rrl:0
+          rwt:0 rwl:0 idle_power:- active_power:-
+ps    1 : mp:6.00W operational enlat:0 exlat:0 rrt:1 rrl:1
+          rwt:1 rwl:1 idle_power:- active_power:-
+ps    2 : mp:3.40W operational enlat:0 exlat:0 rrt:2 rrl:2
+          rwt:2 rwl:2 idle_power:- active_power:-
+ps    3 : mp:0.0700W non-operational enlat:210 exlat:1200 rrt:3 rrl:3
+          rwt:3 rwl:3 idle_power:- active_power:-
+ps    4 : mp:0.0100W non-operational enlat:2000 exlat:8000 rrt:4 rrl:4
+          rwt:4 rwl:4 idle_power:- active_power:-
+
+root@Khadas:~# nvme smart-log /dev/nvme0
+Smart Log for NVME device:nvme0 namespace-id:ffffffff
+critical_warning                    : 0
+temperature                         : 50 C
+available_spare                     : 100%
+available_spare_threshold           : 10%
+percentage_used                     : 0%
+data_units_read                     : 27,035
+data_units_written                  : 23,331
+host_read_commands                  : 18,018
+host_write_commands                 : 2,916,352
+controller_busy_time                : 0
+power_cycles                        : 3
+power_on_hours                      : 1
+unsafe_shutdowns                    : 2
+media_errors                        : 0
+num_err_log_entries                 : 1
+Warning Temperature Time            : 0
+Critical Composite Temperature Time : 0
+Temperature Sensor 1                : 50 C
+Temperature Sensor 2                : 55 C
+Thermal Management T1 Trans Count   : 0
+Thermal Management T2 Trans Count   : 0
+Thermal Management T1 Total Time    : 0
+Thermal Management T2 Total Time    : 0

@@ -6,6 +6,8 @@ iperf3 -c 192.168.0.99 -u -b 0
 iperf3 -c 192.168.0.99 -u -b 1000M
 iperf3 -c 192.168.0.99 -t 20000
 iperf3 -c 192.168.0.99 -u -b 1000M -t1800
+iperf3 -c 192.168.0.99 -R -t600 -V
+iperf3 -c 192.168.0.99 -V -t360; cat /sys/class/thermal/thermal_zone*/temp
 
 Windows --> Server
 thinkpad t460, Core i5-8xxx, Windows 10 x64
@@ -419,3 +421,49 @@ root@Khadas:~# iperf3 -c 192.168.0.99 -u -b 1000M -t1800
 	[ ID] Interval           Transfer     Bandwidth       Jitter    Lost/Total Datagrams
 	[  4]   0.00-1800.00 sec  3.06 GBytes  14.6 Mbits/sec  0.095 ms  0/400511 (0%)
 	[  4] Sent 400511 datagrams
+
+--------------------------------------------------------------------------------------------------------------
+root@Khadas:~# iperf3 -c 192.168.0.99 -R -t600 -V
+
+	iperf 3.1.3
+	Linux Khadas 4.4.194 #2 SMP Mon Jul 25 21:07:53 CST 2022 aarch64
+	Time: Tue, 26 Jul 2022 02:07:17 GMT
+	Connecting to host 192.168.0.99, port 5201
+	Reverse mode, remote host 192.168.0.99 is sending
+		  Cookie: Khadas.1658801237.222425.663a363b3f7
+		  TCP MSS: 1460 (default)
+	[  4] local 192.168.0.100 port 33990 connected to 192.168.0.99 port 5201
+	Starting Test: protocol: TCP, 1 streams, 131072 byte blocks, omitting 0 seconds, 600 second test
+	[ ID] Interval           Transfer     Bandwidth
+	[  4]   0.00-1.00   sec   112 MBytes   939 Mbits/sec
+	[  4]   1.00-2.00   sec   112 MBytes   942 Mbits/sec
+	[  4]   2.00-3.00   sec   112 MBytes   942 Mbits/sec
+	[  4]   3.00-4.00   sec   112 MBytes   942 Mbits/sec
+	[  4]   4.00-5.00   sec   112 MBytes   942 Mbits/sec
+	[  4]   5.00-6.00   sec   112 MBytes   942 Mbits/sec
+	...
+	[  4] 598.00-599.00 sec   112 MBytes   942 Mbits/sec
+	[  4] 599.00-600.00 sec   112 MBytes   942 Mbits/sec
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	Test Complete. Summary Results:
+	[ ID] Interval           Transfer     Bandwidth
+	[  4]   0.00-600.00 sec  65.8 GBytes   941 Mbits/sec                  sender
+	[  4]   0.00-600.00 sec  65.8 GBytes   941 Mbits/sec                  receiver
+	CPU Utilization: local/receiver 30.3% (1.1%u/29.2%s), remote/sender 7.7% (2.0%u/5.8%s)
+
+-----------------------------------------------------------------------------------------------------------------
+iperf3 -c 192.168.0.99 -V -t360; cat /sys/class/thermal/thermal_zone*/temp
+
+
+	[  4] 358.00-359.00 sec   113 MBytes   949 Mbits/sec    0    214 KBytes
+	[  4] 359.00-360.00 sec   113 MBytes   949 Mbits/sec    0    214 KBytes
+	- - - - - - - - - - - - - - - - - - - - - - - - -
+	Test Complete. Summary Results:
+	[ ID] Interval           Transfer     Bandwidth       Retr
+	[  4]   0.00-360.00 sec  39.5 GBytes   943 Mbits/sec    0             sender
+	[  4]   0.00-360.00 sec  39.5 GBytes   943 Mbits/sec                  receiver
+	CPU Utilization: local/sender 27.4% (0.5%u/26.9%s), remote/receiver 9.1% (3.0%u/6.1%s)
+
+	iperf Done.
+	52777
+	53888

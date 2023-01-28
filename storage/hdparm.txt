@@ -1,8 +1,19 @@
 (Edge-V Pro, 32Gb eMMC)
+[Usb Flash, ADATA UV128/16GB USB 3.0, FAT32 23Kb cluster]
+[SSD Samsung 970 EVO Plus]
 
+hdparm -V
+hdparm -Tt /dev/mmcblk1p7		300.79 MB/sec
+sync; hdparm -Tt /dev/sda1		30.49 MB/sec	(Black USB 2.0)
+								87.87 MB/sec	(Blue USB 3.0)
+hdparm -Tt /dev/nvme0n1			535.72 MB/sec
+hdparm -Tt --direct /dev/nvme0n1 496.37 MB/sec
+								
+--------------------------------------------------------
 khadas@Khadas:~$ hdparm -V
 
 	hdparm v9.54
+	
 --------------------------------------------------------
 khadas@Khadas:~$ df -h
 
@@ -15,6 +26,7 @@ khadas@Khadas:~$ df -h
 	tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
 	tmpfs           1.9G     0  1.9G   0% /tmp
 	tmpfs           378M     0  378M   0% /run/user/1000
+	
 --------------------------------------------------------
 khadas@Khadas:~$ sudo hdparm -Tt /dev/mmcblk1p7
 [sudo] password for khadas:
@@ -22,4 +34,84 @@ khadas@Khadas:~$ sudo hdparm -Tt /dev/mmcblk1p7
 	/dev/mmcblk1p7:
 	 Timing cached reads:   2250 MB in  2.00 seconds = 1125.22 MB/sec
 	 Timing buffered disk reads: 904 MB in  3.01 seconds = 300.79 MB/sec
+	 
+	 Timing cached reads:   2158 MB in  2.00 seconds = 1078.67 MB/sec
+	 Timing buffered disk reads: 892 MB in  3.00 seconds = 297.06 MB/sec
+
+	 Timing cached reads:   2196 MB in  2.00 seconds = 1098.12 MB/sec
+	 Timing buffered disk reads: 908 MB in  3.00 seconds = 302.19 MB/sec
+
 --------------------------------------------------------
+usb flash ADATA, BLACK USB Port
+dmesg:
+
+	[ 8282.887444] usb 7-1: new high-speed USB device number 2 using ehci-platform
+	[ 8283.025867] usb 7-1: New USB device found, idVendor=125f, idProduct=db8a
+	[ 8283.025888] usb 7-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+	[ 8283.025896] usb 7-1: Product: ADATA USB Flash Drive
+	[ 8283.025904] usb 7-1: Manufacturer: ADATA
+	[ 8283.025912] usb 7-1: SerialNumber: 279251623023011F
+	[ 8283.027921] usb-storage 7-1:1.0: USB Mass Storage device detected
+	[ 8283.028442] scsi host0: usb-storage 7-1:1.0
+	[ 8284.182690] scsi 0:0:0:0: Direct-Access     ADATA    USB Flash Drive  1100 PQ: 0 ANSI: 6
+	[ 8284.188509] sd 0:0:0:0: [sda] 30310400 512-byte logical blocks: (15.5 GB/14.5 GiB)
+	[ 8284.189950] sd 0:0:0:0: [sda] Write Protect is off
+	[ 8284.189973] sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+	[ 8284.191315] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+	[ 8284.209107]  sda: sda1
+
+root@Khadas:~# fdisk -l
+	...
+	Disk /dev/sda: 14.5 GiB, 15518924800 bytes, 30310400 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disklabel type: gpt
+	Disk identifier: F6719A02-17FE-48B6-8D08-519A8B003C21
+
+	Device     Start      End  Sectors  Size Type
+	/dev/sda1   2048 30310366 30308319 14.5G Microsoft basic data
+
+root@Khadas:~# sync; hdparm -Tt /dev/sda1
+
+	/dev/sda1:
+	 Timing cached reads:   2058 MB in  2.00 seconds = 1028.76 MB/sec
+	 Timing buffered disk reads:  92 MB in  3.02 seconds =  30.49 MB/sec
+
+	 Timing cached reads:   2084 MB in  2.00 seconds = 1042.00 MB/sec
+	 Timing buffered disk reads:  92 MB in  3.04 seconds =  30.29 MB/sec
+
+--------------------------------------------------------
+usb flash ADATA, BLUE USB Port
+
+root@Khadas:~# sync; hdparm -Tt /dev/sda1
+
+/dev/sda1:
+ Timing cached reads:   2128 MB in  2.00 seconds = 1063.73 MB/sec
+ Timing buffered disk reads: 264 MB in  3.00 seconds =  87.87 MB/sec
+
+ Timing cached reads:   2086 MB in  2.00 seconds = 1042.92 MB/sec
+ Timing buffered disk reads: 264 MB in  3.02 seconds =  87.53 MB/sec
+
+ Timing cached reads:   1992 MB in  2.00 seconds = 995.75 MB/sec
+ Timing buffered disk reads: 266 MB in  3.01 seconds =  88.27 MB/sec
+
+--------------------------------------------------------
+root@Khadas:~# hdparm -Tt /dev/nvme0n1
+
+	/dev/nvme0n1:
+	 Timing cached reads:   2164 MB in  2.00 seconds = 1081.86 MB/sec
+	 Timing buffered disk reads: 1608 MB in  3.00 seconds = 535.72 MB/sec
+
+	 Timing cached reads:   2248 MB in  2.00 seconds = 1123.85 MB/sec
+	 Timing buffered disk reads: 1656 MB in  3.00 seconds = 551.41 MB/sec
+
+	 Timing cached reads:   2188 MB in  2.00 seconds = 1093.63 MB/sec
+	 Timing buffered disk reads: 1648 MB in  3.00 seconds = 548.79 MB/sec
+
+--------------------------------------------------------
+root@Khadas:~# hdparm -Tt --direct /dev/nvme0n1
+
+	/dev/nvme0n1:
+	 Timing O_DIRECT cached reads:   990 MB in  2.00 seconds = 494.90 MB/sec
+	 Timing O_DIRECT disk reads: 1490 MB in  3.00 seconds = 496.37 MB/sec

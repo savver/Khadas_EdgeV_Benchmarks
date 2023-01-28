@@ -1,0 +1,29 @@
+khadas@Khadas:~$ sudo ifconfig eth0 192.168.0.99 netmask 255.255.255.0
+[sudo] password for khadas:
+
+khadas@Khadas:~$ ifconfig
+
+	eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+			inet 192.168.0.99  netmask 255.255.255.0  broadcast 192.168.0.255
+			ether d2:1b:7b:e9:63:ef  txqueuelen 1000  (Ethernet)
+			RX packets 5595  bytes 577934 (577.9 KB)
+			RX errors 0  dropped 2819  overruns 0  frame 0
+			TX packets 546  bytes 102252 (102.2 KB)
+			TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+			device interrupt 24
+
+	lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+			inet 127.0.0.1  netmask 255.0.0.0
+			inet6 ::1  prefixlen 128  scopeid 0x10<host>
+			loop  txqueuelen 1  (Local Loopback)
+			RX packets 8  bytes 480 (480.0 B)
+			RX errors 0  dropped 0  overruns 0  frame 0
+			TX packets 8  bytes 480 (480.0 B)
+			TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+	wlan0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+			ether 10:2c:6b:cc:56:dd  txqueuelen 1000  (Ethernet)
+			RX packets 0  bytes 0 (0.0 B)
+			RX errors 0  dropped 0  overruns 0  frame 0
+			TX packets 0  bytes 0 (0.0 B)
+			TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
