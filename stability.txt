@@ -15,3 +15,7 @@
 	
 		1 time was message in dmesg "BUG: spinlock wrong CPU on CPU#2, dhd_dpc/375", 
 		but iperf3 test continue
+		
+2.1) stfp via ethernet, copying from SSD to host PC during long time,
+     check speed during whole test, files checksums, errors in dmesg
+		

@@ -8,6 +8,9 @@ apt search nvme-cli
 nvme list
 nvme id-ctrl /dev/nvme0
 nvme smart-log /dev/nvme0
+mkfs.ext4 /dev/nvme0n1
+mkdir /mnt/ssd_nvme
+mount /dev/nvme0n1 /mnt/ssd_nvme/
 
 -------------------------------------------------------------------------------------------------------
 root@Khadas:~# dmesg | grep nvme
@@ -132,102 +135,146 @@ root@Khadas:~# nvme list
 	---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------
 	/dev/nvme0n1     S4EUNM0T105725N      Samsung SSD 970 EVO Plus 250GB           1           0.00   B / 250.06  GB    512   B +  0 B   2B2QEXM7
 
+-------------------------------------------------------------------------------------------------------
 root@Khadas:~# nvme id-ctrl /dev/nvme0
-NVME Identify Controller:
-vid     : 0x144d
-ssvid   : 0x144d
-sn      : S4EUNM0T105725N
-mn      : Samsung SSD 970 EVO Plus 250GB
-fr      : 2B2QEXM7
-rab     : 2
-ieee    : 002538
-cmic    : 0
-mdts    : 9
-cntlid  : 4
-ver     : 10300
-rtd3r   : 30d40
-rtd3e   : 7a1200
-oaes    : 0
-ctratt  : 0
-oacs    : 0x17
-acl     : 7
-aerl    : 3
-frmw    : 0x16
-lpa     : 0x3
-elpe    : 63
-npss    : 4
-avscc   : 0x1
-apsta   : 0x1
-wctemp  : 358
-cctemp  : 358
-mtfa    : 0
-hmpre   : 0
-hmmin   : 0
-tnvmcap : 250059350016
-unvmcap : 0
-rpmbs   : 0
-edstt   : 35
-dsto    : 0
-fwug    : 0
-kas     : 0
-hctma   : 0x1
-mntmt   : 356
-mxtmt   : 358
-sanicap : 0
-hmminds : 0
-hmmaxd  : 0
-sqes    : 0x66
-cqes    : 0x44
-maxcmd  : 0
-nn      : 1
-oncs    : 0x5f
-fuses   : 0
-fna     : 0x5
-vwc     : 0x1
-awun    : 1023
-awupf   : 0
-nvscc   : 1
-acwu    : 0
-sgls    : 0
-subnqn  :
-ioccsz  : 0
-iorcsz  : 0
-icdoff  : 0
-ctrattr : 0
-msdbd   : 0
-ps    0 : mp:7.80W operational enlat:0 exlat:0 rrt:0 rrl:0
-          rwt:0 rwl:0 idle_power:- active_power:-
-ps    1 : mp:6.00W operational enlat:0 exlat:0 rrt:1 rrl:1
-          rwt:1 rwl:1 idle_power:- active_power:-
-ps    2 : mp:3.40W operational enlat:0 exlat:0 rrt:2 rrl:2
-          rwt:2 rwl:2 idle_power:- active_power:-
-ps    3 : mp:0.0700W non-operational enlat:210 exlat:1200 rrt:3 rrl:3
-          rwt:3 rwl:3 idle_power:- active_power:-
-ps    4 : mp:0.0100W non-operational enlat:2000 exlat:8000 rrt:4 rrl:4
-          rwt:4 rwl:4 idle_power:- active_power:-
 
+	NVME Identify Controller:
+	vid     : 0x144d
+	ssvid   : 0x144d
+	sn      : S4EUNM0T105725N
+	mn      : Samsung SSD 970 EVO Plus 250GB
+	fr      : 2B2QEXM7
+	rab     : 2
+	ieee    : 002538
+	cmic    : 0
+	mdts    : 9
+	cntlid  : 4
+	ver     : 10300
+	rtd3r   : 30d40
+	rtd3e   : 7a1200
+	oaes    : 0
+	ctratt  : 0
+	oacs    : 0x17
+	acl     : 7
+	aerl    : 3
+	frmw    : 0x16
+	lpa     : 0x3
+	elpe    : 63
+	npss    : 4
+	avscc   : 0x1
+	apsta   : 0x1
+	wctemp  : 358
+	cctemp  : 358
+	mtfa    : 0
+	hmpre   : 0
+	hmmin   : 0
+	tnvmcap : 250059350016
+	unvmcap : 0
+	rpmbs   : 0
+	edstt   : 35
+	dsto    : 0
+	fwug    : 0
+	kas     : 0
+	hctma   : 0x1
+	mntmt   : 356
+	mxtmt   : 358
+	sanicap : 0
+	hmminds : 0
+	hmmaxd  : 0
+	sqes    : 0x66
+	cqes    : 0x44
+	maxcmd  : 0
+	nn      : 1
+	oncs    : 0x5f
+	fuses   : 0
+	fna     : 0x5
+	vwc     : 0x1
+	awun    : 1023
+	awupf   : 0
+	nvscc   : 1
+	acwu    : 0
+	sgls    : 0
+	subnqn  :
+	ioccsz  : 0
+	iorcsz  : 0
+	icdoff  : 0
+	ctrattr : 0
+	msdbd   : 0
+	ps    0 : mp:7.80W operational enlat:0 exlat:0 rrt:0 rrl:0
+			  rwt:0 rwl:0 idle_power:- active_power:-
+	ps    1 : mp:6.00W operational enlat:0 exlat:0 rrt:1 rrl:1
+			  rwt:1 rwl:1 idle_power:- active_power:-
+	ps    2 : mp:3.40W operational enlat:0 exlat:0 rrt:2 rrl:2
+			  rwt:2 rwl:2 idle_power:- active_power:-
+	ps    3 : mp:0.0700W non-operational enlat:210 exlat:1200 rrt:3 rrl:3
+			  rwt:3 rwl:3 idle_power:- active_power:-
+	ps    4 : mp:0.0100W non-operational enlat:2000 exlat:8000 rrt:4 rrl:4
+			  rwt:4 rwl:4 idle_power:- active_power:-
+
+-------------------------------------------------------------------------------------------------------
 root@Khadas:~# nvme smart-log /dev/nvme0
-Smart Log for NVME device:nvme0 namespace-id:ffffffff
-critical_warning                    : 0
-temperature                         : 50 C
-available_spare                     : 100%
-available_spare_threshold           : 10%
-percentage_used                     : 0%
-data_units_read                     : 27,035
-data_units_written                  : 23,331
-host_read_commands                  : 18,018
-host_write_commands                 : 2,916,352
-controller_busy_time                : 0
-power_cycles                        : 3
-power_on_hours                      : 1
-unsafe_shutdowns                    : 2
-media_errors                        : 0
-num_err_log_entries                 : 1
-Warning Temperature Time            : 0
-Critical Composite Temperature Time : 0
-Temperature Sensor 1                : 50 C
-Temperature Sensor 2                : 55 C
-Thermal Management T1 Trans Count   : 0
-Thermal Management T2 Trans Count   : 0
-Thermal Management T1 Total Time    : 0
-Thermal Management T2 Total Time    : 0
+
+	Smart Log for NVME device:nvme0 namespace-id:ffffffff
+	critical_warning                    : 0
+	temperature                         : 50 C
+	available_spare                     : 100%
+	available_spare_threshold           : 10%
+	percentage_used                     : 0%
+	data_units_read                     : 27,035
+	data_units_written                  : 23,331
+	host_read_commands                  : 18,018
+	host_write_commands                 : 2,916,352
+	controller_busy_time                : 0
+	power_cycles                        : 3
+	power_on_hours                      : 1
+	unsafe_shutdowns                    : 2
+	media_errors                        : 0
+	num_err_log_entries                 : 1
+	Warning Temperature Time            : 0
+	Critical Composite Temperature Time : 0
+	Temperature Sensor 1                : 50 C
+	Temperature Sensor 2                : 55 C
+	Thermal Management T1 Trans Count   : 0
+	Thermal Management T2 Trans Count   : 0
+	Thermal Management T1 Total Time    : 0
+	Thermal Management T2 Total Time    : 0
+
+-------------------------------------------------------------------------------------------------------
+root@Khadas:~# mkfs.ext4 /dev/nvme0n1
+	
+	mke2fs 1.44.1 (24-Mar-2018)
+	Discarding device blocks: done
+	Creating filesystem with 61049646 4k blocks and 15269888 inodes
+	Filesystem UUID: 9c8e88bc-534f-48f8-8483-fa97aee2ba0e
+	Superblock backups stored on blocks:
+			32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+			4096000, 7962624, 11239424, 20480000, 23887872
+
+	Allocating group tables: done
+	Writing inode tables: done
+	Creating journal (262144 blocks): done
+	Writing superblocks and filesystem accounting information: done
+
+-------------------------------------------------------------------------------------------------------
+root@Khadas:~# mkdir /mnt/ssd_nvme
+root@Khadas:~# mount /dev/nvme0n1 /mnt/ssd_nvme/
+root@Khadas:~# lsblk
+	NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+	sda            8:0    1  14.5G  0 disk
+	└─sda1         8:1    1  14.5G  0 part /mnt/usb_flash
+	mmcblk1      179:0    0  29.1G  0 disk
+	├─mmcblk1p1  179:1    0     4M  0 part
+	├─mmcblk1p2  179:2    0     4M  0 part
+	├─mmcblk1p3  179:3    0     4M  0 part
+	├─mmcblk1p4  179:4    0     4M  0 part
+	├─mmcblk1p5  179:5    0    16M  0 part
+	├─mmcblk1p6  179:6    0    92M  0 part
+	└─mmcblk1p7  179:7    0    29G  0 part /
+	mmcblk1boot0 179:32   0     4M  1 disk
+	mmcblk1boot1 179:64   0     4M  1 disk
+	mmcblk1rpmb  179:96   0     4M  0 disk
+	zram1        252:1    0   256M  0 disk [SWAP]
+	zram2        252:2    0   256M  0 disk [SWAP]
+	zram3        252:3    0   256M  0 disk [SWAP]
+	zram4        252:4    0   256M  0 disk [SWAP]
+	nvme0n1      259:0    0 232.9G  0 disk /mnt/ssd_nvme

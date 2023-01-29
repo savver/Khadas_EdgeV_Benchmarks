@@ -6,15 +6,21 @@ sync; dd if=/dev/zero of=/dev/sda1 bs=1M count=256;				11.9 MB/s
 sync; dd if=/dev/zero of=/dev/sda1 bs=1M count=4096				10.7 MB/s
 sync; dd if=/dev/urandom of=/dev/sda1 bs=1M count=256;			9.0 MB/s
 sudo /sbin/sysctl -w vm.drop_caches=3							cache reset
-sync; dd if=/mnt/usb/file4_128M of=/dev/null bs=1M count=256	87.7 MB/s
-dd if=/mnt/usb/file6_3G of=/dev/null bs=1M count=3072			105 MB/s
+sync; dd if=/mnt/usb/file4_128M of=/dev/null bs=1M count=256	87.7 MB/s					(FAT32, 32Kb Cluster)
+dd if=/mnt/usb/file6_3G of=/dev/null bs=1M count=3072			105 MB/s        			(FAT32, 32Kb Cluster)
 dd if=/mnt/usb/file4_128M of=/dev/null bs=1M count=256			1.0 GB/s (read from cache !!!)
-dd if=/dev/urandom of=/mnt/usb/file6_3G bs=1M count=3072		5.4 MB/s
-dd if=/dev/urandom of=/mnt/usb/file7_128 bs=1M count=128		6.0 MB/s ... 9.3 MB/s
+dd if=/dev/urandom of=/mnt/usb/file6_3G bs=1M count=3072		5.4 MB/s                    (FAT32, 32Kb Cluster)
+dd if=/dev/urandom of=/mnt/usb/file7_128 bs=1M count=128		6.0 MB/s ... 9.3 MB/s		(FAT32, 32Kb Cluster)
+ssd:
 dd if=/dev/zero of=/dev/nvme0n1 bs=1M count=128;				198 MB/s
 dd if=/dev/zero of=/dev/nvme0n1 bs=1M count=256;				255 MB/s
 dd if=/dev/zero of=/dev/nvme0n1 bs=1M count=1024;				255 MB/s			
 dd if=/dev/zero of=/dev/nvme0n1 bs=1M count=4096;				254 MB/s
+ssd, ext4:
+dd if=/dev/urandom of=file1_256M bs=1M count=256				10.4 MB/s
+dd if=/dev/zero of=file3_256M bs=1M count=256					285 MB/s
+dd if=/dev/zero of=file5_1G bs=1M count=1024					339 MB/s
+dd if=file5_1G of=/dev/null bs=1M count=1024					520 MB/s
 
 --------------------------------------------------------
 usb flash ADATA, BLUE USB Port
@@ -140,4 +146,57 @@ root@Khadas:~# sync; dd if=/dev/zero of=/dev/nvme0n1 bs=1M count=4096;
 	4294967296 bytes (4.3 GB, 4.0 GiB) copied, 16.8929 s, 254 MB/s
 
 
+NTFS 32Kb Cluster
+root@Khadas:~# mkdir /mnt/usb_flash
+root@Khadas:~# mount /dev/sda1 /mnt/usb_flash/
+root@Khadas:~# ls /mnt/usb_flash/
+ file_128M    file5_8G       file7_128   file9_3G.md5
+ file2_128M   file5_8G.md5   file8_128  'System Volume Information'
+ file3_128M   file6_3G       file9_128
+ file4_128M   file6_3G.md5   file9_3G
 
+root@Khadas:~# sync; dd if=/mnt/usb_flash/file6_3G of=/dev/null bs=1M count=3072
+3072+0 records in
+3072+0 records out
+3221225472 bytes (3.2 GB, 3.0 GiB) copied, 36.4298 s, 88.4 MB/s
+
+3072+0 records out
+3221225472 bytes (3.2 GB, 3.0 GiB) copied, 34.9304 s, 92.2 MB/s
+
+3072+0 records out
+3221225472 bytes (3.2 GB, 3.0 GiB) copied, 34.8757 s, 92.4 MB/s
+
+------------------------------------------------------
+ssd, ext4
+root@Khadas:/mnt/ssd_nvme# dd if=/dev/urandom of=file1_256M bs=1M count=256
+	256+0 records in
+	256+0 records out
+	268435456 bytes (268 MB, 256 MiB) copied, 25.7227 s, 10.4 MB/s
+
+	268435456 bytes (268 MB, 256 MiB) copied, 25.8572 s, 10.4 MB/s
+
+root@Khadas:/mnt/ssd_nvme# dd if=/dev/zero of=file3_256M bs=1M count=256
+	256+0 records in
+	256+0 records out
+	268435456 bytes (268 MB, 256 MiB) copied, 0.940781 s, 285 MB/s
+
+root@Khadas:/mnt/ssd_nvme# dd if=/dev/zero of=file4_1G bs=1M count=1024
+	1024+0 records in
+	1024+0 records out
+	1073741824 bytes (1.1 GB, 1.0 GiB) copied, 3.09734 s, 347 MB/s
+
+root@Khadas:/mnt/ssd_nvme# dd if=/dev/zero of=file5_1G bs=1M count=1024
+	1024+0 records in
+	1024+0 records out
+	1073741824 bytes (1.1 GB, 1.0 GiB) copied, 3.17184 s, 339 MB/s
+
+------------------------------------------------------
+root@Khadas:/mnt/ssd_nvme# /sbin/sysctl -w vm.drop_caches=3
+	vm.drop_caches = 3
+	
+root@Khadas:/mnt/ssd_nvme# dd if=file5_1G of=/dev/null bs=1M count=1024
+	1024+0 records in
+	1024+0 records out
+	1073741824 bytes (1.1 GB, 1.0 GiB) copied, 2.06577 s, 520 MB/s
+
+	1073741824 bytes (1.1 GB, 1.0 GiB) copied, 2.09904 s, 512 MB/s
