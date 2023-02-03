@@ -1,0 +1,143 @@
+dmesg
+fdisk -l
+mkdir /mnt/usb_hdd
+mount /dev/sda2 /mnt/usb_hdd/
+hdparm -Tt /dev/sda2
+
+------------------------------------------------------------------------------------------------------
+[  350.379307] usb 6-1.1: new SuperSpeed USB device number 3 using xhci-hcd
+[  350.398308] usb 6-1.1: New USB device found, idVendor=125f, idProduct=a75a
+[  350.398329] usb 6-1.1: New USB device strings: Mfr=2, Product=3, SerialNumber=1
+[  350.398338] usb 6-1.1: Product: HD710 PRO
+[  350.398346] usb 6-1.1: Manufacturer: ADATA
+[  350.398353] usb 6-1.1: SerialNumber: 42823390C016
+[  350.406468] scsi host0: uas
+[  350.408749] scsi 0:0:0:0: Direct-Access     ADATA    HD710 PRO        0    PQ: 0 ANSI: 6
+[  350.410271] sd 0:0:0:0: [sda] 7814037168 512-byte logical blocks: (4.00 TB/3.64 TiB)
+[  350.410292] sd 0:0:0:0: [sda] 4096-byte physical blocks
+[  350.410746] sd 0:0:0:0: [sda] Write Protect is off
+[  350.410759] sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+[  350.410966] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[  350.411079] xhci-hcd xhci-hcd.9.auto: ERROR Transfer event for disabled endpoint slot 3 ep 2 or incorrect stream ring
+[  350.412018] xhci-hcd xhci-hcd.9.auto: @00000000eb864bb0 00000000 00000000 1b000000 03038001
+[  350.435305]  sda: sda1 sda2
+[  350.441983] sd 0:0:0:0: [sda] Attached SCSI disk
+
+------------------------------------------------------------------------------------------------------
+khadas@Khadas:~$ fdisk -l
+
+	Disk /dev/ram0: 4 MiB, 4194304 bytes, 8192 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 4096 bytes
+	I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+
+	Disk /dev/nvme0n1: 232.9 GiB, 250059350016 bytes, 488397168 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+	Disk /dev/mmcblk1: 29.1 GiB, 31268536320 bytes, 61071360 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disklabel type: gpt
+	Disk identifier: 8F320000-0000-421E-8000-120000004692
+
+	Device          Start      End  Sectors Size Type
+	/dev/mmcblk1p1     64     8127     8064   4M unknown
+	/dev/mmcblk1p2  16384    24575     8192   4M unknown
+	/dev/mmcblk1p3  24576    32767     8192   4M unknown
+	/dev/mmcblk1p4  32768    40959     8192   4M unknown
+	/dev/mmcblk1p5  40960    73727    32768  16M unknown
+	/dev/mmcblk1p6  73728   262143   188416  92M unknown
+	/dev/mmcblk1p7 262144 61071326 60809183  29G unknown
+
+
+
+
+	Disk /dev/mmcblk1boot1: 4 MiB, 4194304 bytes, 8192 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+	Disk /dev/mmcblk1boot0: 4 MiB, 4194304 bytes, 8192 sectors
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+	Disk /dev/zram1: 256 MiB, 268435456 bytes, 65536 sectors
+	Units: sectors of 1 * 4096 = 4096 bytes
+	Sector size (logical/physical): 4096 bytes / 4096 bytes
+	I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+
+	Disk /dev/zram2: 256 MiB, 268435456 bytes, 65536 sectors
+	Units: sectors of 1 * 4096 = 4096 bytes
+	Sector size (logical/physical): 4096 bytes / 4096 bytes
+	I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+
+	Disk /dev/zram3: 256 MiB, 268435456 bytes, 65536 sectors
+	Units: sectors of 1 * 4096 = 4096 bytes
+	Sector size (logical/physical): 4096 bytes / 4096 bytes
+	I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+
+	Disk /dev/zram4: 256 MiB, 268435456 bytes, 65536 sectors
+	Units: sectors of 1 * 4096 = 4096 bytes
+	Sector size (logical/physical): 4096 bytes / 4096 bytes
+	I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+
+	Disk /dev/sda: 3.7 TiB, 4000787030016 bytes, 7814037168 sectors  (!!!)
+	Units: sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 4096 bytes
+	I/O size (minimum/optimal): 4096 bytes / 33553920 bytes
+	Disklabel type: gpt
+	Disk identifier: 88B9B51B-57DE-4AD3-AEEB-0E7B7601D7C0
+
+	Device     Start        End    Sectors  Size Type
+	/dev/sda1     34      32767      32734   16M Microsoft reserved
+	/dev/sda2  32768 7814035455 7814002688  3.7T Microsoft basic data
+
+	Partition 1 does not start on physical sector boundary.
+------------------------------------------------------------------------------------------------------
+root@Khadas:~# mkdir /mnt/usb_hdd
+
+root@Khadas:~# mount /dev/sda1 /mnt/usb_hdd/
+
+	NTFS signature is missing.
+	Failed to mount '/dev/sda1': Invalid argument
+	The device '/dev/sda1' doesn't seem to have a valid NTFS.
+	Maybe the wrong device is used? Or the whole disk instead of a
+	partition (e.g. /dev/sda, not /dev/sda1)? Or the other way around?
+	
+------------------------------------------------------------------------------------------------------
+root@Khadas:~# mount /dev/sda2 /mnt/usb_hdd/
+
+	The disk contains an unclean file system (0, 0).
+	The file system wasn't safely closed on Windows. Fixing.
+
+------------------------------------------------------------------------------------------------------
+root@Khadas:~# hdparm -Tt /dev/sda2
+
+	/dev/sda2:
+	 Timing cached reads:   2320 MB in  2.00 seconds = 1160.42 MB/sec
+	 Timing buffered disk reads: 340 MB in  3.01 seconds = 112.82 MB/sec
+	root@Khadas:~# hdparm -Tt /dev/sda2
+
+	/dev/sda2:
+	 Timing cached reads:   2318 MB in  2.00 seconds = 1158.74 MB/sec
+	 Timing buffered disk reads: 338 MB in  3.00 seconds = 112.64 MB/sec
+	root@Khadas:~# hdparm -Tt /dev/sda2
+
+	/dev/sda2:
+	 Timing cached reads:   2282 MB in  2.00 seconds = 1141.39 MB/sec
+	 Timing buffered disk reads: 342 MB in  3.02 seconds = 113.37 MB/sec
+
+
+
