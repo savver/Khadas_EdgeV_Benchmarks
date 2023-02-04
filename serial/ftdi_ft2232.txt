@@ -1,0 +1,368 @@
+dmesg | grep ftdi
+ls /dev/ttyUSB
+git clone https://github.com/cbrake/linux-serial-test.git
+apt install cmake
+cmake ./
+linux-serial-test -s -e -p /dev/ttyUSB0 -b 115200
+
+-------------------------------------------------------------------------------------
+root@Khadas:~# dmesg | grep ftdi
+[    2.166372] usbcore: registered new interface driver ftdi_sio
+[    4.464563] ftdi_sio 7-1:1.0: FTDI USB Serial Device converter detected
+[    4.467741] ftdi_sio 7-1:1.1: FTDI USB Serial Device converter detected
+
+
+[    2.163433] usb usb2: New USB device found, idVendor=1d6b, idProduct=0001
+[    2.163452] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    2.163465] usb usb2: Product: Generic Platform OHCI controller
+[    2.163478] usb usb2: Manufacturer: Linux 4.4.194 ohci_hcd
+[    2.163490] usb usb2: SerialNumber: fe3e0000.usb
+[    2.164152] hub 2-0:1.0: USB hub found
+[    2.164194] hub 2-0:1.0: 1 port detected
+[    2.165653] usbcore: registered new interface driver cdc_acm
+[    2.165665] cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+[    2.165724] usbcore: registered new interface driver cdc_wdm
+[    2.165785] usbcore: registered new interface driver uas
+[    2.165907] usbcore: registered new interface driver usb-storage
+[    2.166015] usbcore: registered new interface driver usbserial
+[    2.166063] usbcore: registered new interface driver usbserial_generic
+[    2.166103] usbserial: USB Serial support registered for generic
+[    2.166159] usbcore: registered new interface driver ch341
+[    2.166201] usbserial: USB Serial support registered for ch341-uart
+[    2.166258] usbcore: registered new interface driver cp210x
+[    2.166296] usbserial: USB Serial support registered for cp210x
+[    2.166372] usbcore: registered new interface driver ftdi_sio
+[    2.166411] usbserial: USB Serial support registered for FTDI USB Serial Device
+[    2.166564] usbcore: registered new interface driver keyspan
+[    2.166604] usbserial: USB Serial support registered for Keyspan - (without firmware)
+[    2.166642] usbserial: USB Serial support registered for Keyspan 1 port adapter
+[    2.166685] usbserial: USB Serial support registered for Keyspan 2 port adapter
+[    2.166723] usbserial: USB Serial support registered for Keyspan 4 port adapter
+[    2.166783] usbcore: registered new interface driver option
+[    2.166821] usbserial: USB Serial support registered for GSM modem (1-port)
+[    2.167016] usbcore: registered new interface driver oti6858
+[    2.167054] usbserial: USB Serial support registered for oti6858
+[    2.167111] usbcore: registered new interface driver pl2303
+[    2.167154] usbserial: USB Serial support registered for pl2303
+[    2.167258] usbcore: registered new interface driver qcserial
+[    2.167298] usbserial: USB Serial support registered for Qualcomm USB modem
+[    2.167374] usbcore: registered new interface driver sierra
+[    2.167413] usbserial: USB Serial support registered for Sierra USB modem
+[    2.168902] usbcore: registered new interface driver usbtouchscreen
+[    2.169678] i2c /dev entries driver
+
+
+[    4.323228] usb 7-1: new high-speed USB device number 2 using ehci-platform
+[    4.401364] vendor storage:20190527 ret = 0
+[    4.461405] usb 7-1: New USB device found, idVendor=0403, idProduct=6010
+[    4.461423] usb 7-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[    4.461431] usb 7-1: Product: FT2232H MiniModule
+[    4.461437] usb 7-1: Manufacturer: FTDI
+[    4.461442] usb 7-1: SerialNumber: FT3WC5WB
+[    4.464563] ftdi_sio 7-1:1.0: FTDI USB Serial Device converter detected
+[    4.464699] usb 7-1: Detected FT2232H
+[    4.465308] usb 7-1: FTDI USB Serial Device converter now attached to ttyUSB0
+[    4.467400] dwmmc_rockchip fe310000.dwmmc: Successfully tuned phase to 223
+[    4.467741] ftdi_sio 7-1:1.1: FTDI USB Serial Device converter detected
+[    4.467845] usb 7-1: Detected FT2232H
+[    4.468390] usb 7-1: FTDI USB Serial Device converter now attached to ttyUSB1
+
+-------------------------------------------------------------------------------------
+root@Khadas:~# ls /dev/ttyUSB
+ttyUSB0  ttyUSB1
+
+-------------------------------------------------------------------------------------
+root@Khadas:~# cd /usr/
+root@Khadas:/usr# mkdir tests
+root@Khadas:/usr# ls tests/
+
+root@Khadas:/usr# git clone https://github.com/cbrake/linux-serial-test.git
+
+	Cloning into 'linux-serial-test'...
+	remote: Enumerating objects: 270, done.
+	remote: Counting objects: 100% (155/155), done.
+	remote: Compressing objects: 100% (41/41), done.
+	remote: Total 270 (delta 134), reused 120 (delta 114), pack-reused 115
+	Receiving objects: 100% (270/270), 113.29 KiB | 1.67 MiB/s, done.
+	Resolving deltas: 100% (154/154), done.
+
+root@Khadas:/usr/tests/linux-serial-test# ls -al
+
+	total 104
+	drwxr-xr-x 4 root root  4096 Feb  4 00:09 .
+	drwxr-xr-x 3 root root  4096 Feb  4 00:09 ..
+	-rw-r--r-- 1 root root   202 Feb  4 00:09 angstrom.cmake
+	-rw-r--r-- 1 root root   246 Feb  4 00:09 CMakeLists.txt
+	drwxr-xr-x 8 root root  4096 Feb  4 00:09 .git
+	-rw-r--r-- 1 root root    80 Feb  4 00:09 .gitignore
+	drwxr-xr-x 2 root root  4096 Feb  4 00:09 LICENSES
+	-rw-r--r-- 1 root root 22972 Feb  4 00:09 linux-serial-test.c
+	-rw-r--r-- 1 root root 43904 Feb  4 00:09 measure-baud-rate-example.png
+	-rw-r--r-- 1 root root  4735 Feb  4 00:09 README.md
+
+root@Khadas:/usr/tests/linux-serial-test# apt install cmake
+
+	Reading package lists... Done
+	Building dependency tree
+	Reading state information... Done
+	The following package was automatically installed and is no longer required:
+	  libdrm-common
+	Use 'apt autoremove' to remove it.
+	The following additional packages will be installed:
+	  cmake-data libarchive13 libjsoncpp1 librhash0 libuv1
+	Suggested packages:
+	  cmake-doc ninja-build
+	The following NEW packages will be installed:
+	  cmake cmake-data libarchive13 libjsoncpp1 librhash0 libuv1
+	0 upgraded, 6 newly installed, 0 to remove and 113 not upgraded.
+	Need to get 4,744 kB of archives.
+	After this operation, 24.4 MB of additional disk space will be used.
+	Do you want to continue? [Y/n] Y
+	Get:1 http://ports.ubuntu.com bionic-updates/main arm64 cmake-data all 3.10.2-1ubuntu2.18.04.2 [1,332 kB]
+	Get:2 http://ports.ubuntu.com bionic-security/main arm64 libarchive13 arm64 3.2.2-3.1ubuntu0.7 [244 kB]
+	Get:3 http://ports.ubuntu.com bionic/main arm64 libjsoncpp1 arm64 1.7.4-3 [69.2 kB]
+	Get:4 http://ports.ubuntu.com bionic/main arm64 librhash0 arm64 1.3.6-2 [71.8 kB]
+	Get:5 http://ports.ubuntu.com bionic/main arm64 libuv1 arm64 1.18.0-3 [53.7 kB]
+	Get:6 http://ports.ubuntu.com bionic-updates/main arm64 cmake arm64 3.10.2-1ubuntu2.18.04.2 [2,973 kB]
+	Fetched 4,744 kB in 1s (4,266 kB/s)
+	Selecting previously unselected package cmake-data.
+	Processing triggers for libc-bin (2.27-3ubuntu1.6) ...2_arm64.deb ......
+
+
+root@Khadas:/usr/tests/linux-serial-test# cmake ./
+
+	-- The C compiler identification is GNU 7.5.0
+	-- Check for working C compiler: /usr/bin/cc
+	-- Check for working C compiler: /usr/bin/cc -- works
+	-- Detecting C compiler ABI info
+	-- Detecting C compiler ABI info - done
+	-- Detecting C compile features
+	-- Detecting C compile features - done
+	-- Configuring done
+	-- Generating done
+	-- Build files have been written to: /usr/tests/linux-serial-test
+	root@Khadas:/usr/tests/linux-serial-test# ls -al
+	total 132
+	drwxr-xr-x 5 root root  4096 Feb  4 00:14 .
+	drwxr-xr-x 3 root root  4096 Feb  4 00:09 ..
+	-rw-r--r-- 1 root root   202 Feb  4 00:09 angstrom.cmake
+	-rw-r--r-- 1 root root 10958 Feb  4 00:14 CMakeCache.txt
+	drwxr-xr-x 5 root root  4096 Feb  4 00:14 CMakeFiles
+	-rw-r--r-- 1 root root  2336 Feb  4 00:14 cmake_install.cmake
+	-rw-r--r-- 1 root root   246 Feb  4 00:09 CMakeLists.txt
+	drwxr-xr-x 8 root root  4096 Feb  4 00:09 .git
+	-rw-r--r-- 1 root root    80 Feb  4 00:09 .gitignore
+	drwxr-xr-x 2 root root  4096 Feb  4 00:09 LICENSES
+	-rw-r--r-- 1 root root 22972 Feb  4 00:09 linux-serial-test.c
+	-rw-r--r-- 1 root root  7140 Feb  4 00:14 Makefile
+	-rw-r--r-- 1 root root 43904 Feb  4 00:09 measure-baud-rate-example.png
+	-rw-r--r-- 1 root root  4735 Feb  4 00:09 README.md
+	
+root@Khadas:/usr/tests/linux-serial-test# make
+
+	Scanning dependencies of target linux-serial-test
+	[ 50%] Building C object CMakeFiles/linux-serial-test.dir/linux-serial-test.c.o
+	[100%] Linking C executable linux-serial-test
+	[100%] Built target linux-serial-test
+
+-------------------------------------------------------------------------------------
+linux-serial-test -s -e -p /dev/ttyUSB0 -b 115200
+
+	Linux serial test app
+	/dev/ttyUSB0: count for this session: rx=61915, tx=69632, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=61915, tx=66048, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=131061, tx=138752, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=131061, tx=135424, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=200206, tx=207872, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=200206, tx=204544, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=269352, tx=276992, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=269352, tx=273664, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=338497, tx=346112, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=338497, tx=342784, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=407642, tx=415232, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=407642, tx=411904, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=476788, tx=484352, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=476788, tx=481024, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=545933, tx=553472, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=545933, tx=550144, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=615078, tx=622592, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=615078, tx=619264, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=684224, tx=691712, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=684224, tx=688384, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=753369, tx=760832, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=753369, tx=757504, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=822514, tx=829952, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=822514, tx=826624, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=891660, tx=899072, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=891660, tx=896000, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=960805, tx=968192, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=960805, tx=965120, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=1029950, tx=1037312, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=1029950, tx=1034240, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=1099096, tx=1106432, rx err=0
+
+	force disconnect cable:
+	/dev/ttyUSB0: count for this session: rx=1513968, tx=1521152, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=1513968, tx=1518080, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	Error, count: 1534744, expected 18, got f8 c 80
+	Error, count: 1534745, expected f9, got ff c 80
+	Error, count: 1534746, expected 00, got ff c 80
+	Error, count: 1534747, expected 00, got ed c a
+	Error, count: 1534748, expected ee, got 71 c a
+	Error, count: 1534749, expected 72, got 75 c a
+	Error, count: 1534750, expected 76, got 79 c a
+	Error, count: 1534751, expected 7a, got 7d c a
+	Error, count: 1534752, expected 7e, got 81 c a
+	Error, count: 1534753, expected 82, got 85 c a
+	Error, count: 1534754, expected 86, got 89 c a
+	Error, count: 1534755, expected 8a, got 8d c a
+	Error, count: 1534756, expected 8e, got cb c a
+	Error, count: 1534757, expected cc, got d6 c 5b
+	Error, count: 1534758, expected d7, got 16 c 5b
+	Error, count: 1534759, expected 17, got ad c 5b
+	Error, count: 1534760, expected ae, got 2d c 5b
+	Error, count: 1534761, expected 2e, got ad c 5b
+	Error, count: 1534762, expected ae, got fd c 5b
+	Error, count: 1534763, expected fe, got cb c 5b
+	Error, count: 1534764, expected cc, got 7f c 5b
+	Error, count: 1534765, expected 80, got f0 c 5b
+	Error, count: 1534766, expected f1, got 2e c 5b
+	Error, count: 1534767, expected 2f, got 5d c 5b
+	Error, count: 1534768, expected 5e, got 5d c 5b
+	Error, count: 1534769, expected 5e, got bb c 5b
+	Error, count: 1534770, expected bc, got 17 c 5b
+	Error, count: 1534771, expected 18, got af c 5b
+	Error, count: 1534772, expected b0, got 2f c 5b
+	Error, count: 1534773, expected 30, got af c 5b
+	Error, count: 1534774, expected b0, got 2f c 5b
+	Error, count: 1534775, expected 30, got 5f c 5b
+	Error, count: 1534776, expected 60, got 5f c 5b
+	Error, count: 1534777, expected 60, got bf c 5b
+	Error, count: 1534778, expected c0, got 01 c 5b
+	Error, count: 1534779, expected 02, got 0b c 5b
+	Error, count: 1534780, expected 0c, got 13 c 5b
+	Error, count: 1534781, expected 14, got 36 c 5b
+	Error, count: 1534782, expected 37, got 46 c 5b
+	Error, count: 1534783, expected 47, got ac c 5b
+	Error, count: 1534784, expected ad, got ff c 5b
+	Error, count: 1534785, expected 00, got ec c 5b
+	Error, count: 1534786, expected ed, got 18 c 5b
+	Error, count: 1534787, expected 19, got 2c c 5b
+	Error, count: 1534788, expected 2d, got ec c 5b
+	Error, count: 1534789, expected ed, got 6c c 5b
+	Error, count: 1534790, expected 6d, got 8c c 5b
+	Error, count: 1534791, expected 8d, got ac c 5b
+	Error, count: 1534792, expected ad, got cc c 5b
+	Error, count: 1534793, expected cd, got ec c 5b
+	Error, count: 1534794, expected ed, got 0c c 5b
+	Error, count: 1534795, expected 0d, got 59 c 5b
+	Error, count: 1534796, expected 5a, got 99 c 5b
+	Error, count: 1534797, expected 9a, got b2 c 5b
+	Error, count: 1534798, expected b3, got 32 c 5b
+	Error, count: 1534799, expected 33, got 7f c 5b
+	Error, count: 1534800, expected 80, got 67 c 5b
+	Error, count: 1534801, expected 68, got de c 5b
+	Error, count: 1534802, expected df, got e6 c 5b
+	Error, count: 1534803, expected e7, got f6 c 5b
+	Error, count: 1534804, expected f7, got 06 c 5b
+	Error, count: 1534805, expected 07, got 3d c 5b
+	Error, count: 1534806, expected 3e, got ed c 5b
+	Error, count: 1534807, expected ee, got bf c 5b
+	Error, count: 1534808, expected c0, got a7 c 5b
+	Error, count: 1534811, expected aa, got 6d c 5b
+	Error, count: 1534812, expected 6e, got 8d c 5b
+	Error, count: 1534813, expected 8e, got ad c 5b
+	Error, count: 1534814, expected ae, got cd c 5b
+	Error, count: 1534815, expected ce, got ed c 5b
+	Error, count: 1534816, expected ee, got 0d c 5b
+	Error, count: 1534817, expected 0e, got 5b c 5b
+	Error, count: 1534818, expected 5c, got 9b c 5b
+	Error, count: 1534819, expected 9c, got b6 c 5b
+	Error, count: 1534820, expected b7, got 1b c 5b
+	Error, count: 1534821, expected 1c, got 5b c 5b
+	Error, count: 1534822, expected 5c, got 9b c 5b
+	Error, count: 1534823, expected 9c, got bb c 5b
+	Error, count: 1534824, expected bc, got c3 c 5b
+	Error, count: 1534825, expected c4, got cb c 5b
+	Error, count: 1534826, expected cc, got d3 c 5b
+	Error, count: 1534827, expected d4, got db c 5b
+	Error, count: 1534828, expected dc, got e3 c 5b
+	Error, count: 1534829, expected e4, got eb c 5b
+	Error, count: 1534830, expected ec, got f3 c 5b
+	Error, count: 1534831, expected f4, got fb c 5b
+	Error, count: 1534832, expected fc, got 03 c 5b
+	Error, count: 1534833, expected 04, got 17 c 5b
+	Error, count: 1534834, expected 18, got 27 c 5b
+	Error, count: 1534835, expected 28, got 6e c 5b
+	Error, count: 1534836, expected 6f, got 8e c 5b
+	Error, count: 1534837, expected 8f, got 5c c 5b
+	Error, count: 1534838, expected 5d, got 9c c 5b
+	Error, count: 1534839, expected 9d, got dc c 5b
+	Error, count: 1534840, expected dd, got 1c c 5b
+	Error, count: 1534841, expected 1d, got b9 c 5b
+	Error, count: 1534842, expected ba, got bd c 5b
+	Error, count: 1534843, expected be, got 6f c 5b
+	Error, count: 1534844, expected 70, got 8e c 5b
+	Error, count: 1534845, expected 8f, got ae c 5b
+	Error, count: 1534846, expected af, got ce c 5b
+	Error, count: 1534847, expected cf, got ee c 5b
+	/dev/ttyUSB0: No data received for 2.1s.
+	/dev/ttyUSB0: No data received for 3.3s.
+	/dev/ttyUSB0: No data received for 4.5s.
+	/dev/ttyUSB0: count for this session: rx=1534848, tx=1594880, rx err=102
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=1534848, tx=1590784, frame = 2, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: No data received for 5.7s.
+	/dev/ttyUSB0: No data received for 6.9s.
+
+-------------------------------------------------------------------------------------
+linux-serial-test -s -e -p /dev/ttyUSB0 -b 921600
+
+	Linux serial test app
+	...
+	/dev/ttyUSB0: count for this session: rx=28756860, tx=28764416, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=28756860, tx=28761088, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=29310720, tx=29317376, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=29310720, tx=29315072, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=29864580, tx=29870336, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=29864580, tx=29868800, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=30418440, tx=30423296, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=30418440, tx=30422784, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	...
+	/dev/ttyUSB0: count for this session: rx=3575592660, tx=3575597056, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-719374636, tx=-719370240, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=3576146010, tx=3576154624, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-718821286, tx=-718816768, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=3576700380, tx=3576707584, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-718266916, tx=-718262528, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=3577254240, tx=3577260544, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-717713056, tx=-717708800, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=3577808100, tx=3577813504, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-717159196, tx=-717154816, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=3578361960, tx=3578366464, rx err=0
+	...
+-------------------------------------------------------------------------------------
+root@Khadas:/usr/tests/lst# ./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
+
+	Linux serial test app
+	/dev/ttyUSB0: count for this session: rx=1777860, tx=1783808, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-600476103, tx=-600453120, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=3577650, tx=3585536, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-598676313, tx=-598653440, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=5377950, tx=5382656, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-596876013, tx=-596853248, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=7177740, tx=7184384, rx err=0
+	...
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-321476013, tx=-321453056, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=282578250, tx=282583296, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-319675713, tx=-319652864, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=284378040, tx=284385024, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-317875923, tx=-317852928, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=286177830, tx=286182144, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-316076133, tx=-316053248, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+
+root@Khadas:/usr/tests/lst# ./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
+
+	Linux serial test app
+	/dev/ttyUSB0: count for this session: rx=1536120, tx=1544448, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-302752383, tx=-302724864, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=3336420, tx=3341568, rx err=0

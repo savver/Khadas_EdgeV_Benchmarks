@@ -1,8 +1,23 @@
 dmesg
+temperature tests
 fdisk -l
 mkdir /mnt/usb_hdd
 mount /dev/sda2 /mnt/usb_hdd/
 hdparm -Tt /dev/sda2
+
+--------------------------------------------------------------------------------------------------------
+max temperature:
+copying by sftp ~50Gb files, power consumption = 9..12 Wt,
+root@Khadas:~# cat /sys/class/thermal/thermal_zone*/temp
+76875
+75000
+(ssd, ethernet 1Gb are connected)
+
+!!! if bad USB cable, USB_voltage may be less on board,
+ex. on PowerSource 5.32V, jn pls-40 "+5" --> 4.89v,
+hdd is started, but during copying speed becomes small, kernel panic
+
+5.0v on pls-40 is comfortable for AData HD710 USB3.0 2Tb
 
 ------------------------------------------------------------------------------------------------------
 [  350.379307] usb 6-1.1: new SuperSpeed USB device number 3 using xhci-hcd
