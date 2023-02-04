@@ -357,8 +357,8 @@ root@Khadas:/usr/tests/lst# ./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
 	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-319675713, tx=-319652864, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
 	/dev/ttyUSB0: count for this session: rx=284378040, tx=284385024, rx err=0
 	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-317875923, tx=-317852928, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
-	/dev/ttyUSB0: count for this session: rx=286177830, tx=286182144, rx err=0
-	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-316076133, tx=-316053248, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=286_177_830, tx=286182144, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-316_076_133, tx=-316053248, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
 
 root@Khadas:/usr/tests/lst# ./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
 
@@ -366,3 +366,18 @@ root@Khadas:/usr/tests/lst# ./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
 	/dev/ttyUSB0: count for this session: rx=1536120, tx=1544448, rx err=0
 	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-302752383, tx=-302724864, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
 	/dev/ttyUSB0: count for this session: rx=3336420, tx=3341568, rx err=0
+
+
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-59751663, tx=-59724288, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=246336630, tx=246341376, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-57_951_873, tx=-57924352, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=248_136_420, tx=248143104, rx err=0
+	
+	/dev/ttyUSB0: count for this session: rx=649501689, tx=649505792, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=748407966, tx=748439552, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=651_301_989, tx=651_307_520, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=750_208_266, tx=750_240_000, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-1420770190, tx=-1420738304, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
+	/dev/ttyUSB0: count for this session: rx=2777091129, tx=2777097216, rx err=0
+

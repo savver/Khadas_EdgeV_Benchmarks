@@ -18,4 +18,8 @@
 		
 2.1) stfp via ethernet, copying from SSD to host PC during long time,
      check speed during whole test, files checksums, errors in dmesg
+	 
+3) usb-com -> loopback test for some hours, also use eth+sftp for file transfering with hdd/flash/ssd
+              loopback test + copying from ssd to usb_flash/hdd (use usb), or dd files creation on usb_flash/hdd
+			  
 		
