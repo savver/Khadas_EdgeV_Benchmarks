@@ -3,7 +3,17 @@ ls /dev/ttyUSB
 git clone https://github.com/cbrake/linux-serial-test.git
 apt install cmake
 cmake ./
-linux-serial-test -s -e -p /dev/ttyUSB0 -b 115200
+./linux-serial-test -s -e -p /dev/ttyUSB0 -b 115200
+./linux-serial-test -s -e -p /dev/ttyUSB0 -b 921600
+./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
+echo 600000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
+
+try in parallel:
+./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
+./linux-serial-test -s -e -p /dev/ttyUSB2 -b 921600  (CP2102)
+echo 600000 > /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq
+dd if=/dev/urandom of=/mnt/ssd_nvme/file_random_128G bs=1M count=131072
 
 -------------------------------------------------------------------------------------
 root@Khadas:~# dmesg | grep ftdi
@@ -380,4 +390,86 @@ root@Khadas:/usr/tests/lst# ./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
 
 	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-1420770190, tx=-1420738304, frame = 2, overrun = 1, parity = 0, brk = 0, buf_overrun = 0
 	/dev/ttyUSB0: count for this session: rx=2777091129, tx=2777097216, rx err=0
+
+-------------------------------------------------------------------------------------
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu5/cpufreq/scaling_max_freq
+
+root@Khadas:~# cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq
+	600000
+	600000
+	600000
+	600000
+	600000
+	600000
+
+root@Khadas:/usr/tests/lst# ./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
+	Linux serial test app
+	/dev/ttyUSB0: count for this session: rx=1515720, tx=1523200, rx err=0
+	/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=1515720, tx=1520128, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+
+	20:10:09 up 46 min,  2 users,  load average: 0.16, 0.54, 0.79
+	62500
+	63125
+	Temperature:                        59 Celsius
+	Warning  Comp. Temperature Time:    0
+	Critical Comp. Temperature Time:    0
+	Temperature Sensor 1:               59 Celsius
+	Temperature Sensor 2:               63 Celsius
+
+	20:14:17 up 50 min,  2 users,  load average: 0.22, 0.35, 0.65
+	59444
+	60000
+	Temperature:                        57 Celsius
+	Warning  Comp. Temperature Time:    0
+	Critical Comp. Temperature Time:    0
+	Temperature Sensor 1:               57 Celsius
+	Temperature Sensor 2:               62 Celsius
+
+
+	20:14:20 up 50 min,  2 users,  load average: 0.22, 0.35, 0.65
+	59444
+	60625
+	Temperature:                        57 Celsius
+	Warning  Comp. Temperature Time:    0
+	Critical Comp. Temperature Time:    0
+	Temperature Sensor 1:               57 Celsius
+	Temperature Sensor 2:               62 Celsius
+
+-------------------------------------------------------------------------------------
+try in parallel:
+./linux-serial-test -s -e -p /dev/ttyUSB0 -b 3000000
+./linux-serial-test -s -e -p /dev/ttyUSB2 -b 921600  (CP2102)
+echo 600000 > /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq
+dd if=/dev/urandom of=/mnt/ssd_nvme/file_random_128G bs=1M count=131072
+
+21:48:51 up 47 min,  4 users,  load average: 1.36, 1.22, 0.78
+62500 ...63125
+61875 ...63125
+Temperature:                        56 Celsius
+Warning  Comp. Temperature Time:    0
+Critical Comp. Temperature Time:    0
+Temperature Sensor 1:               56 Celsius  ..57
+Temperature Sensor 2:               61 Celsius ..62
+
+ft2232:
+/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=707_172_630, tx=707176960, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+/dev/ttyUSB0: count for this session: rx=708_972_930, tx=708979456, rx err=0
+...
+/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=-247_011_616, tx=-247007232, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+/dev/ttyUSB0: count for this session: rx=4_049_755_470, tx=4_049_764_096, rx err=0
+...
+/dev/ttyUSB0: TIOCGICOUNT: ret=0, rx=1_734_791_264, tx=1734795520, frame = 0, overrun = 0, parity = 0, brk = 0, buf_overrun = 0
+/dev/ttyUSB0: count for this session: rx=6_029_758_560, tx=6029766656, rx err=0
+
+cp2102:
+/dev/ttyUSB2: count for this session: rx=74_958_179, tx=74962944, rx err=0
+Error getting TIOCGICOUNT: Inappropriate ioctl for device
+...
+/dev/ttyUSB2: count for this session: rx=1_240_351_377, tx=1240353792, rx err=0
+Error getting TIOCGICOUNT: Inappropriate ioctl for device
 

@@ -1,3 +1,10 @@
+cpufreq-info
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq
+cat /sys/devices/system/cpu/cpu5/cpufreq/stats/time_in_state
+echo 600000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
+--------------------------------------------------------------------------------
 khadas@Khadas:~$ cpufreq-
 
 	cpufreq-aperf  cpufreq-info   cpufreq-set
@@ -150,3 +157,28 @@ khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu5/cpufreq/stats/time_in_state
 	1416000 56
 	1608000 7
 	1800000 243
+	
+--------------------------------------------------------------------------------	
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
+root@Khadas:~# echo 600000 > /sys/devices/system/cpu/cpu5/cpufreq/scaling_max_freq
+
+root@Khadas:~# cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq
+	600000
+	600000
+	600000
+	600000
+	600000
+	600000
+	
+after reset:
+khadas@Khadas:~$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq
+1416000
+1416000
+1416000
+1416000
+1800000
+1800000
